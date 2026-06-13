@@ -1,18 +1,14 @@
-import { promises as fs } from "fs";
-import path from "path";
-
-const WAITLIST_PATH = path.join(process.cwd(), "waitlist.json");
-
-async function readWaitlist(): Promise<string[]> {
-  try {
-    const raw = await fs.readFile(WAITLIST_PATH, "utf-8");
-    return JSON.parse(raw);
-  } catch {
-    return [];
-  }
-}
-
 export async function POST(request: Request) {
+  const apiKey = process.env.BREVO_API_KEY;
+  const listId = process.env.BREVO_LIST_ID;
+
+  if (!apiKey || !listId) {
+    return Response.json(
+      { error: "Configuration serveur manquante : BREVO_API_KEY ou BREVO_LIST_ID non défini." },
+      { status: 500 }
+    );
+  }
+
   const body = await request.json().catch(() => null);
   const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
 
@@ -20,14 +16,31 @@ export async function POST(request: Request) {
     return Response.json({ error: "Adresse email invalide." }, { status: 400 });
   }
 
-  const list = await readWaitlist();
+  const res = await fetch("https://api.brevo.com/v3/contacts", {
+    method: "POST",
+    headers: {
+      "api-key": apiKey,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      listIds: [Number(listId)],
+      updateEnabled: true,
+    }),
+  });
 
-  if (list.includes(email)) {
+  if (res.status === 201) {
+    return Response.json({ message: "registered" }, { status: 201 });
+  }
+
+  if (res.status === 204) {
     return Response.json({ message: "already_registered" }, { status: 200 });
   }
 
-  list.push(email);
-  await fs.writeFile(WAITLIST_PATH, JSON.stringify(list, null, 2), "utf-8");
-
-  return Response.json({ message: "registered" }, { status: 201 });
+  const error = await res.json().catch(() => ({}));
+  return Response.json(
+    { error: error?.message ?? "Erreur Brevo inattendue.", code: error?.code },
+    { status: 502 }
+  );
 }
