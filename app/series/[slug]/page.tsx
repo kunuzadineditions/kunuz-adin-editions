@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { seriesMeta, getSeriesBySlug, getBooksBySeries } from "@/lib/books";
@@ -89,36 +90,50 @@ export default async function SeriesPage(props: PageProps<"/series/[slug]">) {
                 >
                   {/* Mini cover */}
                   <div
-                    className="flex-shrink-0 w-20 sm:w-24 aspect-[3/4] flex flex-col items-center justify-center text-center p-2"
+                    className="relative flex-shrink-0 w-20 sm:w-24 aspect-[3/4] overflow-hidden flex flex-col items-center justify-center text-center p-2"
                     style={{
                       backgroundColor: book.coverColor,
                       boxShadow: "inset 0 0 0 1px rgba(201,168,76,0.12)",
                     }}
                   >
-                    <div className="h-px w-4 bg-gold mb-2" />
-                    <p
-                      className="font-display text-gold text-[10px] leading-snug"
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
-                      {book.title}
-                    </p>
-                    <div className="h-px w-4 bg-gold mt-2" />
+                    {book.coverImage ? (
+                      <Image
+                        src={book.coverImage}
+                        alt={book.title}
+                        fill
+                        className="object-cover"
+                        sizes="96px"
+                      />
+                    ) : (
+                      <>
+                        <div className="h-px w-4 bg-gold mb-2" />
+                        <p
+                          className="font-display text-gold text-[10px] leading-snug"
+                          style={{ fontFamily: "var(--font-display)" }}
+                        >
+                          {book.title}
+                        </p>
+                        <div className="h-px w-4 bg-gold mt-2" />
+                      </>
+                    )}
                   </div>
 
                   {/* Info */}
                   <div className="flex flex-col justify-between flex-1 min-w-0 py-1">
                     <div>
                       <div className="flex items-start justify-between gap-2 mb-2">
-                        <p className="text-[10px] tracking-[0.2em] text-gold-dark uppercase">
-                          Vol. {i + 1}
-                        </p>
                         <span className="font-display text-lg text-gold leading-none">
                           {book.price}
                         </span>
                       </div>
-                      <h3 className="font-display text-lg sm:text-xl text-text group-hover:text-gold transition-colors duration-300 leading-snug mb-3">
+                      <h3 className="font-display text-lg sm:text-xl text-text group-hover:text-gold transition-colors duration-300 leading-snug mb-1">
                         {book.title}
                       </h3>
+                      {book.companion && (
+                        <p className="text-[10px] tracking-[0.15em] text-gold-dark italic mb-3">
+                          Compagnon du livre <span className="not-italic">{book.companion}</span>
+                        </p>
+                      )}
                       <p className="text-text-secondary text-sm leading-relaxed line-clamp-2">
                         {book.summaryShort}
                       </p>
@@ -130,6 +145,10 @@ export default async function SeriesPage(props: PageProps<"/series/[slug]">) {
                 </Link>
               ))}
             </div>
+
+            <p className="text-text-secondary/50 text-xs tracking-wide italic mt-6">
+              D&rsquo;autres titres rejoindront la collection, in sha Allah.
+            </p>
           </div>
 
           {/* Sidebar — about the series */}

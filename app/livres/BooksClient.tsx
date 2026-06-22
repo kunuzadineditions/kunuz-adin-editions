@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { Book } from "@/lib/books";
 
@@ -10,25 +11,37 @@ function BookGridCard({ book }: { book: Book }) {
       {/* Cover */}
       <Link href={`/livres/${book.slug}`} className="block">
         <div
-          className="w-full aspect-[3/4] flex flex-col items-center justify-center text-center p-6 transition-opacity duration-300 group-hover:opacity-90"
+          className="relative w-full aspect-[3/4] overflow-hidden flex flex-col items-center justify-center text-center p-6 transition-opacity duration-300 group-hover:opacity-90"
           style={{
             backgroundColor: book.coverColor,
             boxShadow: "inset 0 0 0 1px rgba(201,168,76,0.12)",
           }}
         >
-          {book.seriesLabel && (
-            <p className="text-[10px] tracking-[0.3em] text-gold-dark uppercase mb-4">
-              {book.seriesLabel}
-            </p>
+          {book.coverImage ? (
+            <Image
+              src={book.coverImage}
+              alt={book.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          ) : (
+            <>
+              {book.seriesLabel && (
+                <p className="text-[10px] tracking-[0.3em] text-gold-dark uppercase mb-4">
+                  {book.seriesLabel}
+                </p>
+              )}
+              <div className="h-px w-8 bg-gold mb-4" />
+              <p
+                className="font-display text-gold text-base leading-snug px-2"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                {book.title}
+              </p>
+              <div className="h-px w-8 bg-gold mt-4" />
+            </>
           )}
-          <div className="h-px w-8 bg-gold mb-4" />
-          <p
-            className="font-display text-gold text-base leading-snug px-2"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            {book.title}
-          </p>
-          <div className="h-px w-8 bg-gold mt-4" />
         </div>
       </Link>
 

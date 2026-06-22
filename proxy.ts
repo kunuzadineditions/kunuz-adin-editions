@@ -8,7 +8,20 @@ export function proxy(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  if (pathname === "/" || pathname.startsWith("/api/waitlist")) {
+  if (
+    pathname === "/" ||
+    pathname === "/success" ||
+    pathname === "/mentions-legales" ||
+    pathname === "/confidentialite" ||
+    pathname === "/contact" ||
+    pathname === "/fondateur" ||
+    pathname === "/livre-audio" ||
+    pathname.startsWith("/api/waitlist") ||
+    pathname.startsWith("/api/checkout") ||
+    pathname.startsWith("/api/stripe/") ||
+    pathname.startsWith("/api/register-fondateur") ||
+    pathname.startsWith("/api/webhook")
+  ) {
     return NextResponse.next();
   }
 

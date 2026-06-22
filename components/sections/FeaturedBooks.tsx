@@ -1,25 +1,11 @@
+import { books } from "@/lib/books";
 import BookCard from "@/components/ui/BookCard";
 
-const books = [
-  {
-    title: "Tu pries mais tu ne t'apaises pas",
-    subtitle: "Essai spirituel",
-    price: "26,50 €",
-    summary:
-      "Une exploration profonde du paradoxe de la prière sans paix intérieure. Pourquoi le cœur reste-t-il agité malgré la salah ? Un livre qui interroge la présence, la sincérité et la guérison par l'acte d'adoration.",
-    amazonUrl: "#",
-    coverColor: "#13100A",
-  },
-  {
-    title: "Carnet Cœur Vivant",
-    subtitle: "Collection Cœur Vivant — Carnet de pratique",
-    price: "16,90 €",
-    summary:
-      "Un carnet de travail spirituel conçu pour accompagner la purification du cœur au quotidien. Réflexions guidées, espaces d'écriture et extraits des maîtres de la tradition islamique.",
-    amazonUrl: "#",
-    coverColor: "#0E1210",
-  },
-];
+const FEATURED_SLUGS = ["tu-pries-mais-tu-ne-tapaises-pas", "carnet-coeur-vivant"];
+
+const featuredBooks = FEATURED_SLUGS
+  .map((slug) => books.find((b) => b.slug === slug))
+  .filter((b): b is NonNullable<typeof b> => b !== undefined);
 
 export default function FeaturedBooks() {
   return (
@@ -38,9 +24,23 @@ export default function FeaturedBooks() {
 
         {/* Book cards */}
         <div className="flex flex-col gap-6">
-          {books.map((book) => (
-            <BookCard key={book.title} {...book} />
-          ))}
+          {featuredBooks.map((book) => {
+            const primary = book.purchaseLinks.find((l) => l.primary) ?? book.purchaseLinks[0];
+            return (
+              <BookCard
+                key={book.slug}
+                slug={book.slug}
+                title={book.title}
+                subtitle={book.seriesLabel ?? undefined}
+                price={book.price}
+                summary={book.summaryShort}
+                ctaLabel={primary?.label}
+                ctaSublabel={primary?.sublabel}
+                coverColor={book.coverColor}
+                coverImage={book.coverImage}
+              />
+            );
+          })}
         </div>
 
         {/* Link to full catalogue */}

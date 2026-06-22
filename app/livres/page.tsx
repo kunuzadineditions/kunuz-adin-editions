@@ -5,7 +5,7 @@ import BooksClient from "./BooksClient";
 export const metadata: Metadata = {
   title: "Livres",
   description:
-    "Catalogue complet de KUNUZ ADIN Éditions — livres islamiques francophones ancrés dans la tradition.",
+    "Catalogue complet de KUNUZ ADIN Éditions, livres islamiques francophones ancrés dans la tradition.",
 };
 
 export default function LivresPage() {
@@ -29,7 +29,7 @@ export default function LivresPage() {
             Nos livres
           </h1>
           <p className="text-text-secondary max-w-lg leading-relaxed">
-            Des ouvrages conçus pour nourrir le cœur, ancrer la foi et accompagner le travail intérieur — dans la langue de ceux qui grandissent entre deux rives.
+            Des ouvrages conçus pour nourrir le cœur, ancrer la foi et accompagner le travail intérieur, dans la langue de ceux qui grandissent entre deux rives.
           </p>
           <div className="h-px w-24 bg-gold-dark mt-8" />
         </div>

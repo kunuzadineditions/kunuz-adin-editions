@@ -3,6 +3,8 @@ import { Cormorant_Garamond, Inter, Amiri } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import CartDrawer from "@/components/cart/CartDrawer";
+import { CartProvider } from "@/context/CartContext";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -27,10 +29,10 @@ const amiri = Amiri({
 export const metadata: Metadata = {
   title: {
     default: "KUNUZ ADIN Éditions",
-    template: "%s — KUNUZ ADIN Éditions",
+    template: "%s · KUNUZ ADIN Éditions",
   },
   description:
-    "Maison d'édition islamique francophone fondée par Ahmed Kartaba. Livres, séries et ressources pour la communauté musulmane francophone.",
+    "Maison d'édition islamique francophone fondée par Ahmed K. Livres, séries et ressources pour la communauté musulmane francophone.",
   keywords: ["islam", "livres islamiques", "éditions", "francophone", "kunuz adin"],
 };
 
@@ -45,9 +47,12 @@ export default function RootLayout({
       className={`${cormorant.variable} ${inter.variable} ${amiri.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-bg text-text antialiased">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <CartDrawer />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

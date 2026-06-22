@@ -2,17 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Ahmed Kartaba — Auteur",
+  title: "Ahmed K. · Auteur",
   description:
-    "Ahmed Kartaba, auteur et réalisateur franco-algérien, fondateur de KUNUZ ADIN Éditions. Penseur ancré dans la tradition islamique classique.",
+    "Ahmed K., auteur et réalisateur audiovisuel, fondateur de KUNUZ ADIN ÉDITIONS. Auteur de la série Cœur Vivant.",
 };
-
-const references = [
-  { name: "France Télévisions", domain: "Audiovisuel public" },
-  { name: "Red Bull Media", domain: "Documentaire & contenu" },
-  { name: "Royal Mansour", domain: "Hôtellerie de luxe" },
-  { name: "NamX", domain: "Technologie & énergie" },
-];
 
 const influences = [
   {
@@ -36,12 +29,10 @@ export default function AuteurPage() {
         <div className="mb-20">
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-12 bg-gold-dark" />
-            <p className="text-xs tracking-[0.3em] text-gold uppercase">
-              Auteur
-            </p>
+            <p className="text-xs tracking-[0.3em] text-gold uppercase">Auteur</p>
           </div>
           <h1 className="font-display text-5xl sm:text-6xl text-text font-light leading-tight mb-2">
-            Ahmed Kartaba
+            Ahmed K.
           </h1>
           <p className="text-text-secondary tracking-widest text-sm uppercase">
             Auteur · Réalisateur · Fondateur
@@ -56,67 +47,45 @@ export default function AuteurPage() {
             {/* Portrait placeholder */}
             <div
               className="w-full sm:w-72 aspect-square mb-10 flex items-end p-6 border border-border"
-              style={{
-                background:
-                  "linear-gradient(160deg, #1A1510 0%, #0C0C0C 100%)",
-              }}
+              style={{ background: "linear-gradient(160deg, #1A1510 0%, #0C0C0C 100%)" }}
             >
               <div>
                 <div className="h-px w-8 bg-gold mb-3" />
-                <p className="font-display text-text-secondary text-sm leading-snug">
-                  Ahmed Kartaba
-                </p>
-                <p className="text-[10px] tracking-widest text-text-secondary/50 uppercase mt-1">
-                  Paris — Alger
-                </p>
+                <p className="font-display text-text-secondary text-sm leading-snug">Ahmed K.</p>
               </div>
             </div>
 
-            {/* Bio paragraphs */}
+            {/* Bio */}
             <div className="space-y-6 text-text-secondary leading-relaxed">
               <p>
-                Ahmed Kartaba est auteur et réalisateur franco-algérien. Il travaille à l&rsquo;intersection de la narration, de l&rsquo;image et de la pensée islamique classique. Son œuvre écrite prolonge un travail de longue haleine sur la transmission — comment faire passer, dans la langue de ceux qui grandissent entre deux rives, ce que les maîtres du passé ont compris du cœur humain.
+                Ahmed K. est auteur et réalisateur audiovisuel, documentaire, publicité, contenus de marque.
+                Dès 2010, il collabore avec plusieurs maisons d&rsquo;édition islamiques, prête sa voix à de
+                nombreux livres audio, et réalise des vidéos pour des marques et promotions islamiques, dont
+                il assure aussi la voix off, parmi les premiers à le faire sur YouTube. Cette expérience le
+                mène ensuite vers de grandes marques internationales, télévision nationale, sport extrême,
+                hôtellerie de luxe, innovation automobile, dont il raconte les histoires à travers le monde.
               </p>
               <p>
-                Fondateur de <span className="text-text">KUNUZ ADIN Éditions</span>, il y porte un projet éditorial précis : ni vulgarisation approximative, ni érudition inaccessible. Des livres qui exigent du lecteur, sans le perdre. Des livres utiles, au sens fort du terme.
+                Le cœur, sa purification, sa proximité avec Allah est au centre de sa vie depuis toujours,
+                bien avant que la caméra ou le micro n&rsquo;entrent en scène. Depuis des années, il lit,
+                apprend, approfondit, nourri par l&rsquo;enseignement des grands savants de l&rsquo;islam,
+                Ibn al-Qayyim, Ibn Taymiyya et par ses études de psychologie islamique. Une quête patiente
+                pour comprendre ce mal silencieux qui touche tant de musulmans pratiquants : le vide malgré
+                la pratique, la lourdeur malgré le dhikr.
               </p>
               <p>
-                Son ancrage intellectuel puise d&rsquo;abord chez <span className="text-text">Ibn al-Qayyim al-Jawziyya</span> (691–751 H.), dont l&rsquo;œuvre constitue l&rsquo;une des contributions les plus rigoureuses à la science de la purification du cœur (<em>tazkiyat al-nafs</em>). Et chez son maître, <span className="text-text">Ibn Taymiyya</span>, pour la méthode, la rigueur du retour aux sources, et le refus des compromis intellectuels.
+                De cette double expérience l&rsquo;art de raconter et l&rsquo;exigence de la science du
+                cœur, est née la série <span className="text-text">Cœur Vivant</span>, et avec elle,{" "}
+                <span className="text-text">KUNUZ ADIN ÉDITIONS</span>, la maison qu&rsquo;il a fondée.
               </p>
               <p>
-                Ces figures ne sont pas des références de façade. Elles structurent une manière de lire, d&rsquo;écrire et de comprendre ce que l&rsquo;islam a à dire à l&rsquo;homme d&rsquo;aujourd&rsquo;hui — avec précision, sans condescendance.
+                Ahmed K. écrit pour celles et ceux qui pratiquent sans que leur cœur ne s&rsquo;apaise
+                avec une exigence constante : rester fidèle à la source, sans jamais la diluer.
               </p>
-            </div>
-
-            {/* Divider */}
-            <div className="h-px w-16 bg-gold-dark my-12" />
-
-            {/* Pro background */}
-            <div>
-              <h2 className="font-display text-2xl text-text font-light mb-6">
-                Parcours professionnel
-              </h2>
-              <p className="text-text-secondary leading-relaxed mb-8">
-                Avant de fonder KUNUZ ADIN Éditions, Ahmed Kartaba a exercé comme réalisateur et directeur de création dans des environnements exigeants — documentaire, publicité de prestige, contenus de marque. Ce parcours a forgé une discipline du récit, une attention au mot juste, et une exigence formelle que l&rsquo;on retrouve dans ses livres.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {references.map((ref) => (
-                  <div
-                    key={ref.name}
-                    className="border border-border px-5 py-4 hover:border-gold-dark transition-colors duration-300"
-                  >
-                    <p className="text-text text-sm font-medium">{ref.name}</p>
-                    <p className="text-text-secondary text-xs tracking-wide mt-0.5">
-                      {ref.domain}
-                    </p>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
 
-          {/* Sidebar — influences */}
+          {/* Sidebar */}
           <div className="lg:sticky lg:top-28 flex flex-col gap-8">
 
             {/* Influences */}
@@ -126,10 +95,7 @@ export default function AuteurPage() {
               </h2>
               <div className="flex flex-col gap-5">
                 {influences.map((inf) => (
-                  <div
-                    key={inf.name}
-                    className="border-l-2 border-gold-dark pl-5 py-1"
-                  >
+                  <div key={inf.name} className="border-l-2 border-gold-dark pl-5 py-1">
                     <p
                       className="font-arabic text-gold text-xl mb-1 text-right"
                       dir="rtl"
@@ -137,12 +103,8 @@ export default function AuteurPage() {
                     >
                       {inf.arabic}
                     </p>
-                    <p className="text-text text-sm font-medium mb-1">
-                      {inf.name}
-                    </p>
-                    <p className="text-text-secondary text-xs leading-relaxed">
-                      {inf.desc}
-                    </p>
+                    <p className="text-text text-sm font-medium mb-1">{inf.name}</p>
+                    <p className="text-text-secondary text-xs leading-relaxed">{inf.desc}</p>
                   </div>
                 ))}
               </div>
@@ -151,16 +113,13 @@ export default function AuteurPage() {
             {/* Editions info */}
             <div className="border border-border p-5">
               <p className="text-[10px] tracking-[0.25em] text-gold uppercase mb-4">
-                KUNUZ ADIN Éditions
+                KUNUZ ADIN ÉDITIONS
               </p>
               <p className="text-text-secondary text-xs leading-relaxed mb-4">
-                Maison d&rsquo;édition islamique francophone. Fondée pour transmettre les trésors de la tradition islamique dans la langue de ses lecteurs.
+                Maison d&rsquo;édition islamique francophone. Fondée pour transmettre les trésors
+                de la tradition islamique dans la langue de ses lecteurs.
               </p>
-              <p
-                className="font-arabic text-2xl text-gold text-right"
-                dir="rtl"
-                lang="ar"
-              >
+              <p className="font-arabic text-2xl text-gold text-right" dir="rtl" lang="ar">
                 كنوز الدين
               </p>
             </div>

@@ -113,7 +113,7 @@ export default function ComingSoon() {
 
             {status === "duplicate" && (
               <p className="text-gold/70 text-xs text-center mt-4 tracking-wide">
-                Cette adresse est déjà enregistrée — nous vous contacterons à l&rsquo;ouverture.
+                Cette adresse est déjà enregistrée. Nous vous contacterons à l&rsquo;ouverture.
               </p>
             )}
             {status === "error" && (

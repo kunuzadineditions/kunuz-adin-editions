@@ -7,14 +7,14 @@ const footerLinks = {
     { href: "/nouveautes", label: "Nouveautés" },
   ],
   Maison: [
-    { href: "/auteur", label: "Ahmed Kartaba" },
+    { href: "/auteur", label: "Ahmed K." },
     { href: "/blog", label: "Blog" },
     { href: "/a-propos", label: "À propos" },
   ],
   Boutique: [
     { href: "/boutique", label: "Commander" },
-    { href: "/boutique/livraison", label: "Livraison" },
     { href: "/contact", label: "Contact" },
+    { href: "mailto:contact@kunuz-adin-editions.com", label: "contact@kunuz-adin-editions.com" },
   ],
 };
 
@@ -79,7 +79,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-text-secondary tracking-wide">
           <span>
-            &copy; {new Date().getFullYear()} KUNUZ ADIN ÉDITIONS &mdash; KOMBOKOM. Tous droits réservés.
+            &copy; {new Date().getFullYear()} KUNUZ ADIN ÉDITIONS. Tous droits réservés.
           </span>
           <div className="flex gap-5">
             <Link href="/mentions-legales" className="hover:text-gold transition-colors duration-300">
