@@ -6,13 +6,14 @@ import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 
 const navLinks = [
-  { href: "/livres", label: "Livres" },
-  { href: "/series", label: "Séries" },
-  { href: "/blog", label: "Blog" },
-  { href: "/boutique", label: "Boutique" },
+  // { href: "/livres", label: "Livres" },
+  // { href: "/series", label: "Séries" },
+  // { href: "/blog", label: "Blog" },
+  // { href: "/boutique", label: "Boutique" },
   { href: "/fondateur", label: "Fondateur" },
-  { href: "/livre-audio", label: "Livre Audio" },
-  { href: "/auteur", label: "Auteur" },
+  // { href: "/livre-audio", label: "Livre Audio" },
+  // { href: "/auteur", label: "Auteur" },
+  { href: "/", label: "Bientôt disponible" },
 ];
 
 export default function Header() {
@@ -57,12 +58,12 @@ export default function Header() {
               ))}
             </nav>
 
-            <CartButton totalItems={totalItems} onClick={openCart} />
+            {/* <CartButton totalItems={totalItems} onClick={openCart} /> */}
           </div>
 
           {/* Mobile: cart + hamburger */}
           <div className="md:hidden flex items-center gap-3">
-            <CartButton totalItems={totalItems} onClick={openCart} />
+            {/* <CartButton totalItems={totalItems} onClick={openCart} /> */}
 
             <button
               className="flex flex-col justify-center items-center w-8 h-8 gap-1.5"
