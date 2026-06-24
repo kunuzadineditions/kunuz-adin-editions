@@ -20,7 +20,8 @@ export function proxy(request: NextRequest) {
     pathname.startsWith("/api/checkout") ||
     pathname.startsWith("/api/stripe/") ||
     pathname.startsWith("/api/register-fondateur") ||
-    pathname.startsWith("/api/webhook")
+    pathname.startsWith("/api/webhook") ||
+    pathname.startsWith("/api/cron/")
   ) {
     return NextResponse.next();
   }
