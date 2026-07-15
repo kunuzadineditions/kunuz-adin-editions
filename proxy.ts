@@ -15,7 +15,9 @@ export function proxy(request: NextRequest) {
     pathname === "/confidentialite" ||
     pathname === "/contact" ||
     pathname === "/fondateur" ||
+    pathname === "/prevente" ||
     pathname === "/livre-audio" ||
+    pathname.startsWith("/api/prevente") ||
     pathname.startsWith("/api/waitlist") ||
     pathname.startsWith("/api/checkout") ||
     pathname.startsWith("/api/stripe/") ||
