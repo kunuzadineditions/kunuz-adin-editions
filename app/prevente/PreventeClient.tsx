@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, FormEvent } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, FormEvent } from "react";
 import Image from "next/image";
 import { Check, ChevronRight, ChevronDown, Minus, Plus } from "lucide-react";
 
@@ -168,21 +168,31 @@ export default function PreventeClient() {
     qteCarnet * prixCarnetUnit;
   const portOffert = totalIndicatif >= 49;
 
-  // Ref mis à jour à chaque rendu : évite les stale closures en React 18 concurrent mode
+  // Ref mis à jour après chaque commit (useLayoutEffect = safe en concurrent mode,
+  // contrairement à une mutation pendant le rendu qui peut être rejoué).
   const submitValuesRef = useRef({
-    qtePack, qteLivre, qteCarnet,
-    prenom, email, pays,
-    prixPackUnit, prixLivreUnit, prixCarnetUnit,
-    remisePack, remiseLivre, remiseCarnet,
-    totalIndicatif,
+    qtePack: 0, qteLivre: 0, qteCarnet: 0,
+    prenom: "", email: "", pays: "",
+    prixPackUnit: PRIX_PACK_NORMAL,
+    prixLivreUnit: PRIX_LIVRE_NORMAL,
+    prixCarnetUnit: PRIX_CARNET_NORMAL,
+    remisePack: false, remiseLivre: false, remiseCarnet: false,
+    totalIndicatif: 0,
   });
-  submitValuesRef.current = {
-    qtePack, qteLivre, qteCarnet,
-    prenom, email, pays,
-    prixPackUnit, prixLivreUnit, prixCarnetUnit,
-    remisePack, remiseLivre, remiseCarnet,
-    totalIndicatif,
-  };
+  useLayoutEffect(() => {
+    submitValuesRef.current = {
+      qtePack, qteLivre, qteCarnet,
+      prenom, email, pays,
+      prixPackUnit, prixLivreUnit, prixCarnetUnit,
+      remisePack, remiseLivre, remiseCarnet,
+      totalIndicatif,
+    };
+  });
+
+  // Efface l'erreur dès que l'utilisateur modifie une quantité
+  useEffect(() => {
+    setError("");
+  }, [qtePack, qteLivre, qteCarnet]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
