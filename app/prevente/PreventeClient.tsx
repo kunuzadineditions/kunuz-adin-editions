@@ -198,15 +198,31 @@ export default function PreventeClient() {
     e.preventDefault();
     setError("");
 
+    // Log STATE closure values BEFORE ref destructuring shadows them
+    console.log("[DEBUG] STATE closure (fermeture React):", {
+      qtePack_state: qtePack,
+      qteLivre_state: qteLivre,
+      qteCarnet_state: qteCarnet,
+      prenom_state: prenom,
+      email_state: email,
+      pays_state: pays,
+    });
+
     const {
-      qtePack, qteLivre, qteCarnet,
-      prenom, email, pays,
+      qtePack: refQtePack, qteLivre: refQteLivre, qteCarnet: refQteCarnet,
+      prenom: refPrenom, email: refEmail, pays: refPays,
       prixPackUnit, prixLivreUnit, prixCarnetUnit,
       remisePack, remiseLivre, remiseCarnet,
       totalIndicatif,
     } = submitValuesRef.current;
 
-    if (qtePack === 0 && qteLivre === 0 && qteCarnet === 0) {
+    console.log("[DEBUG] REF values (useLayoutEffect):", {
+      refQtePack, refQteLivre, refQteCarnet,
+      refPrenom, refEmail, refPays,
+    });
+
+    if (refQtePack === 0 && refQteLivre === 0 && refQteCarnet === 0) {
+      console.log("[DEBUG] BLOQUE par ref: refQtePack=" + refQtePack + " refQteLivre=" + refQteLivre + " refQteCarnet=" + refQteCarnet);
       setError("Sélectionnez au moins un produit.");
       return;
     }
@@ -217,20 +233,21 @@ export default function PreventeClient() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          prenom, email, pays,
-          qte_pack:   qtePack,
-          qte_livre:  qteLivre,
-          qte_carnet: qteCarnet,
+          prenom: refPrenom, email: refEmail, pays: refPays,
+          qte_pack:   refQtePack,
+          qte_livre:  refQteLivre,
+          qte_carnet: refQteCarnet,
         }),
       });
       const data = await res.json();
       if (!res.ok) {
+        console.log("[DEBUG] BLOQUE par serveur:", data.error);
         setError(data.error || "Une erreur est survenue.");
         setLoading(false);
         return;
       }
       setSnapshot({
-        qtePack, qteLivre, qteCarnet,
+        qtePack: refQtePack, qteLivre: refQteLivre, qteCarnet: refQteCarnet,
         prixPack: prixPackUnit, prixLivre: prixLivreUnit, prixCarnet: prixCarnetUnit,
         remisePack, remiseLivre, remiseCarnet,
         total: totalIndicatif,
