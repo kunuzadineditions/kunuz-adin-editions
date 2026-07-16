@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import Image from "next/image";
 import { Check, ChevronRight, ChevronDown, Minus, Plus } from "lucide-react";
 
@@ -168,9 +168,33 @@ export default function PreventeClient() {
     qteCarnet * prixCarnetUnit;
   const portOffert = totalIndicatif >= 49;
 
+  // Ref mis à jour à chaque rendu : évite les stale closures en React 18 concurrent mode
+  const submitValuesRef = useRef({
+    qtePack, qteLivre, qteCarnet,
+    prenom, email, pays,
+    prixPackUnit, prixLivreUnit, prixCarnetUnit,
+    remisePack, remiseLivre, remiseCarnet,
+    totalIndicatif,
+  });
+  submitValuesRef.current = {
+    qtePack, qteLivre, qteCarnet,
+    prenom, email, pays,
+    prixPackUnit, prixLivreUnit, prixCarnetUnit,
+    remisePack, remiseLivre, remiseCarnet,
+    totalIndicatif,
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
+
+    const {
+      qtePack, qteLivre, qteCarnet,
+      prenom, email, pays,
+      prixPackUnit, prixLivreUnit, prixCarnetUnit,
+      remisePack, remiseLivre, remiseCarnet,
+      totalIndicatif,
+    } = submitValuesRef.current;
 
     if (qtePack === 0 && qteLivre === 0 && qteCarnet === 0) {
       setError("Sélectionnez au moins un produit.");
