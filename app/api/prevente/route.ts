@@ -4,37 +4,38 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Service role requis pour lire v_stock_prevente (RLS anon = insert only)
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-const PRIX_LIVRE_NORMAL = 26.5;
-const PRIX_LIVRE_REMISE = 21;
+const PRIX_LIVRE_NORMAL  = 26.5;
+const PRIX_LIVRE_REMISE  = 21;
 const PRIX_CARNET_NORMAL = 16.9;
 const PRIX_CARNET_REMISE = 13.5;
+const PRIX_PACK_NORMAL   = 43.4;  // 26,50 + 16,90
+const PRIX_PACK_REMISE   = 30;
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { prenom, email, pays, qte_livre, qte_carnet } = body;
+  const { prenom, email, pays, qte_livre, qte_carnet, qte_pack } = body;
 
-  // Validation
   if (!prenom || !email || !pays) {
     return NextResponse.json({ error: "Champs manquants" }, { status: 400 });
   }
 
-  const qteLivre = parseInt(qte_livre, 10) || 0;
+  const qteLivre  = parseInt(qte_livre,  10) || 0;
   const qteCarnet = parseInt(qte_carnet, 10) || 0;
+  const qtePack   = parseInt(qte_pack,   10) || 0;
 
-  if (qteLivre < 0 || qteCarnet < 0) {
+  if (qteLivre < 0 || qteCarnet < 0 || qtePack < 0) {
     return NextResponse.json({ error: "Quantités invalides" }, { status: 400 });
   }
-  if (qteLivre === 0 && qteCarnet === 0) {
+  if (qteLivre === 0 && qteCarnet === 0 && qtePack === 0) {
     return NextResponse.json({ error: "Sélectionnez au moins un produit" }, { status: 400 });
   }
 
-  // Lecture des places -20% restantes (côté serveur, service role)
+  // Lecture des places -20% restantes (service role, bypass RLS)
   const { data: stock, error: stockError } = await supabaseAdmin
     .from("v_stock_prevente")
     .select("places_livre_restantes, places_carnet_restantes")
@@ -45,32 +46,43 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 
-  const placesLivre = stock?.places_livre_restantes ?? 0;
-  const placesCarnet = stock?.places_carnet_restantes ?? 0;
+  // Calcul des prix côté serveur : pack en premier (consomme les deux slots)
+  let placesLivre  = stock?.places_livre_restantes  ?? 0;
+  let placesCarnet = stock?.places_carnet_restantes ?? 0;
 
-  // Calcul des prix côté serveur — logique tout ou rien par réservation
-  const remiseLivre = qteLivre > 0 && placesLivre >= qteLivre;
+  const remisePack = qtePack > 0 && placesLivre >= qtePack && placesCarnet >= qtePack;
+  if (remisePack) {
+    placesLivre  -= qtePack;
+    placesCarnet -= qtePack;
+  }
+
+  const remiseLivre  = qteLivre  > 0 && placesLivre  >= qteLivre;
   const remiseCarnet = qteCarnet > 0 && placesCarnet >= qteCarnet;
 
-  const prixLivre = qteLivre > 0 ? (remiseLivre ? PRIX_LIVRE_REMISE : PRIX_LIVRE_NORMAL) : null;
+  const prixPack   = qtePack   > 0 ? (remisePack   ? PRIX_PACK_REMISE   : PRIX_PACK_NORMAL)   : null;
+  const prixLivre  = qteLivre  > 0 ? (remiseLivre  ? PRIX_LIVRE_REMISE  : PRIX_LIVRE_NORMAL)  : null;
   const prixCarnet = qteCarnet > 0 ? (remiseCarnet ? PRIX_CARNET_REMISE : PRIX_CARNET_NORMAL) : null;
 
   const totalIndicatif =
-    (qteLivre > 0 ? qteLivre * prixLivre! : 0) +
+    (qtePack   > 0 ? qtePack   * prixPack!   : 0) +
+    (qteLivre  > 0 ? qteLivre  * prixLivre!  : 0) +
     (qteCarnet > 0 ? qteCarnet * prixCarnet! : 0);
 
   // Insertion en base
   const { error: dbError } = await supabaseAdmin.from("preventes").insert({
-    prenom: prenom.trim(),
-    email: email.trim().toLowerCase(),
+    prenom:               prenom.trim(),
+    email:                email.trim().toLowerCase(),
     pays,
-    qte_livre: qteLivre,
-    qte_carnet: qteCarnet,
-    prix_livre_unitaire: prixLivre,
+    qte_livre:            qteLivre,
+    qte_carnet:           qteCarnet,
+    qte_pack:             qtePack,
+    prix_livre_unitaire:  prixLivre,
     carnet_prix_unitaire: prixCarnet,
-    remise_livre: remiseLivre,
-    remise_carnet: remiseCarnet,
-    total_indicatif: totalIndicatif,
+    prix_pack_unitaire:   prixPack,
+    remise_livre:         remiseLivre,
+    remise_carnet:        remiseCarnet,
+    remise_pack:          remisePack,
+    total_indicatif:      totalIndicatif,
   });
 
   if (dbError) {
@@ -78,11 +90,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 
-  // Email de confirmation
   const lignesRecap = buildRecapLines(
-    qteLivre, prixLivre, remiseLivre,
+    qtePack,   prixPack,   remisePack,
+    qteLivre,  prixLivre,  remiseLivre,
     qteCarnet, prixCarnet, remiseCarnet,
-    totalIndicatif
   );
 
   const clientEmailResult = await resend.emails.send({
@@ -95,7 +106,6 @@ export async function POST(req: NextRequest) {
     console.error("[prevente] Échec email client:", JSON.stringify(clientEmailResult.error));
   }
 
-  // Alerte admin
   const adminEmailResult = await resend.emails.send({
     from: "KUNUZ ADIN ÉDITIONS <noreply@kunuz-adin-editions.com>",
     to: "contact@kunuz-adin-editions.com",
@@ -109,7 +119,7 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({ ok: true });
 }
 
-// ─── Helpers email ────────────────────────────────────────────────────────────
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 interface ProduitRecap {
   label: string;
@@ -121,30 +131,40 @@ interface ProduitRecap {
 }
 
 function buildRecapLines(
-  qteLivre: number, prixLivre: number | null, remiseLivre: boolean,
+  qtePack:   number, prixPack:   number | null, remisePack:   boolean,
+  qteLivre:  number, prixLivre:  number | null, remiseLivre:  boolean,
   qteCarnet: number, prixCarnet: number | null, remiseCarnet: boolean,
-  total: number
 ): ProduitRecap[] {
   const lines: ProduitRecap[] = [];
 
+  if (qtePack > 0 && prixPack !== null) {
+    lines.push({
+      label:        "Pack Coeur Vivant (livre + carnet)",
+      qte:          qtePack,
+      prixUnitaire: prixPack,
+      remise:       remisePack,
+      prixNormal:   PRIX_PACK_NORMAL,
+      sousTotal:    qtePack * prixPack,
+    });
+  }
   if (qteLivre > 0 && prixLivre !== null) {
     lines.push({
-      label: "Tu pries, mais tu ne t'apaises pas",
-      qte: qteLivre,
+      label:        "Tu pries, mais tu ne t'apaises pas",
+      qte:          qteLivre,
       prixUnitaire: prixLivre,
-      remise: remiseLivre,
-      prixNormal: PRIX_LIVRE_NORMAL,
-      sousTotal: qteLivre * prixLivre,
+      remise:       remiseLivre,
+      prixNormal:   PRIX_LIVRE_NORMAL,
+      sousTotal:    qteLivre * prixLivre,
     });
   }
   if (qteCarnet > 0 && prixCarnet !== null) {
     lines.push({
-      label: "Carnet de cheminement Cœur Vivant",
-      qte: qteCarnet,
+      label:        "Carnet de cheminement Coeur Vivant",
+      qte:          qteCarnet,
       prixUnitaire: prixCarnet,
-      remise: remiseCarnet,
-      prixNormal: PRIX_CARNET_NORMAL,
-      sousTotal: qteCarnet * prixCarnet,
+      remise:       remiseCarnet,
+      prixNormal:   PRIX_CARNET_NORMAL,
+      sousTotal:    qteCarnet * prixCarnet,
     });
   }
   return lines;
@@ -220,7 +240,7 @@ function buildEmailHtml(prenom: string, produits: ProduitRecap[], total: number)
       <td style="padding:12px 16px;color:#fff;font-size:14px;line-height:1.5;">
         <div style="font-weight:600;">${p.label}</div>
         ${p.remise
-          ? `<div style="color:#C9A84C;font-size:12px;margin-top:2px;">Prix de lancement −20 % (garanti à la commande)</div>`
+          ? `<div style="color:#C9A84C;font-size:12px;margin-top:2px;">Prix de lancement -20% (garanti a la commande)</div>`
           : `<div style="color:#888;font-size:12px;margin-top:2px;">Tarif standard</div>`}
       </td>
       <td style="padding:12px 16px;color:#ccc;font-size:14px;text-align:center;">${p.qte}</td>
@@ -275,8 +295,8 @@ function buildEmailHtml(prenom: string, produits: ProduitRecap[], total: number)
   <div style="background:#C9A84C11;border:1px solid #C9A84C33;border-radius:12px;padding:20px 24px;margin-bottom:20px;">
     <p style="color:#C9A84C;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px;">Important</p>
     <p style="color:#ccc;font-size:14px;line-height:1.8;margin:0;">
-      Aucun paiement n'est prélevé à ce stade. Cette réservation garantit votre prix —
-      le règlement s'effectuera uniquement au moment du lancement officiel,
+      Aucun paiement n'est prélevé à ce stade. Cette réservation garantit votre prix.
+      Le règlement s'effectuera uniquement au moment du lancement officiel,
       via un lien qui vous sera envoyé par email.
     </p>
   </div>
@@ -284,7 +304,7 @@ function buildEmailHtml(prenom: string, produits: ProduitRecap[], total: number)
   <div style="background:#141414;border:1px solid #333;border-radius:12px;padding:20px 24px;margin-bottom:20px;">
     <p style="color:#C9A84C;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:0 0 12px;">Informations livraison</p>
     <ul style="color:#ccc;font-size:14px;line-height:2;padding-left:20px;margin:0;">
-      <li>Première expédition : <strong style="color:#fff;">mi-août au plus tard, in shâ Allah</strong> — possiblement avant</li>
+      <li>Première expédition : <strong style="color:#fff;">mi-août au plus tard, in shâ Allah</strong>, possiblement avant</li>
       <li>Frais de port offerts dès 49 € d'achat</li>
       <li>Première impression en quantité limitée</li>
     </ul>
@@ -293,7 +313,7 @@ function buildEmailHtml(prenom: string, produits: ProduitRecap[], total: number)
   <div style="background:#141414;border:1px solid #333;border-radius:12px;padding:20px 24px;margin-bottom:32px;">
     <p style="color:#C9A84C;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px;">Ces deux ouvrages sont conçus pour aller ensemble</p>
     <p style="color:#ccc;font-size:14px;line-height:1.8;margin:0;">
-      <strong style="color:#fff;">Le livre</strong> pour comprendre —
+      <strong style="color:#fff;">Le livre</strong> pour comprendre,
       <strong style="color:#fff;">le carnet</strong> pour cheminer.
       Deux outils distincts, une seule démarche de paix intérieure.
     </p>
