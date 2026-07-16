@@ -133,11 +133,17 @@ export default function PreventeClient() {
   const [done,     setDone]     = useState(false);
   const [snapshot, setSnapshot] = useState<SuccessSnapshot | null>(null);
 
-  useEffect(() => {
+  const fetchStock = () => {
     fetch("/api/prevente/stock")
       .then((r) => r.json())
       .then((d: Stock) => { setStock(d); setStockLoaded(true); })
       .catch(() => setStockLoaded(true));
+  };
+
+  useEffect(() => {
+    fetchStock();
+    const id = setInterval(fetchStock, 30_000);
+    return () => clearInterval(id);
   }, []);
 
   // Mirrors server logic : pack en premier, puis livre, puis carnet
@@ -195,6 +201,7 @@ export default function PreventeClient() {
         remisePack, remiseLivre, remiseCarnet,
         total: totalIndicatif,
       });
+      fetchStock();
       setDone(true);
     } catch {
       setError("Erreur réseau. Veuillez réessayer.");
