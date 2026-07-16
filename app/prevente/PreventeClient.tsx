@@ -328,7 +328,7 @@ export default function PreventeClient() {
 
             {packDisponible && stockLoaded && (
               <p className="text-zinc-500 text-xs mb-3">
-                Séparément en prévente : {formatEur(PRIX_LIVRE_REMISE + PRIX_CARNET_REMISE)} — vous économisez {formatEur((PRIX_LIVRE_REMISE + PRIX_CARNET_REMISE) - PRIX_PACK_REMISE)} de plus
+                Séparément en prévente : {formatEur(PRIX_LIVRE_REMISE + PRIX_CARNET_REMISE)}, vous économisez {formatEur((PRIX_LIVRE_REMISE + PRIX_CARNET_REMISE) - PRIX_PACK_REMISE)} de plus
               </p>
             )}
 
