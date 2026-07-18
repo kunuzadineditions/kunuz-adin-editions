@@ -16,8 +16,11 @@ export function proxy(request: NextRequest) {
     pathname === "/contact" ||
     pathname === "/fondateur" ||
     pathname === "/prevente" ||
+    pathname === "/retractation" ||
+    pathname === "/cgv" ||
     pathname === "/livre-audio" ||
     pathname.startsWith("/api/prevente") ||
+    pathname.startsWith("/api/retractation") ||
     pathname.startsWith("/api/waitlist") ||
     pathname.startsWith("/api/checkout") ||
     pathname.startsWith("/api/stripe/") ||

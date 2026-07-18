@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 
 const fmt = (amount: number) =>
@@ -177,6 +178,17 @@ export default function CartDrawer() {
             {error && (
               <p className="text-[11px] text-red-400/80 leading-snug">{error}</p>
             )}
+
+            <p className="text-[11px] text-text-secondary/50 leading-relaxed">
+              Droit de rétractation de 14 jours. Frais de retour à la charge du client.{" "}
+              <Link
+                href="/cgv"
+                onClick={closeCart}
+                className="underline underline-offset-2 hover:text-gold transition-colors duration-200"
+              >
+                En savoir plus
+              </Link>
+            </p>
 
             {/* Checkout CTA */}
             <button
