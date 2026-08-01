@@ -240,8 +240,7 @@ export default function FondateurPage() {
           </div>
           <div className="text-right">
             <p className="text-xs text-[#C9A84C] mb-0.5">Vous économisez</p>
-            <p className="text-xl font-bold text-[#C9A84C]">+ 10,30€</p>
-            <p className="text-zinc-500 text-xs">(pack + port France)</p>
+            <p className="text-xl font-bold text-[#C9A84C]">+ 13,40€</p>
           </div>
         </div>
       </section>
