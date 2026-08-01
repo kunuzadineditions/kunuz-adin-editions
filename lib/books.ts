@@ -49,7 +49,7 @@ export const books: Book[] = [
         label: "Commander", sublabel: "Relié", url: "#", icon: "book", primary: true,
         stripePrice: process.env.STRIPE_PRICE_LIVRE1,
       },
-      { label: "Commander", sublabel: "Broché · Amazon", url: "#", icon: "book" },
+      { label: "Commander", sublabel: "Broché · Amazon", url: "https://www.amazon.fr/dp/2489151002", icon: "book" },
     ],
     isbn: "978-2-489151-00-8",
     format: "148 × 210 mm",
