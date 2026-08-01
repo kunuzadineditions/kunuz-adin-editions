@@ -8,7 +8,7 @@ export async function POST() {
     mode: 'payment',
     line_items: [
       {
-        price: 'price_1Tl6gBHsvBneNqFisuZU8c7u',
+        price: 'price_1TzgxKHsvBneNqFiWKsAZHsY',
         quantity: 1,
       },
     ],

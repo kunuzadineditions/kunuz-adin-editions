@@ -8,7 +8,7 @@ import FlipBook from "./FlipBook";
 import AddToCartButton from "@/components/shop/AddToCartButton";
 
 export function generateStaticParams() {
-  return books.map((b) => ({ slug: b.slug }));
+  return books.filter((b) => b.detailPage !== false).map((b) => ({ slug: b.slug }));
 }
 
 export async function generateMetadata(
@@ -59,7 +59,7 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
   const { slug } = await props.params;
   const book = getBookBySlug(slug);
 
-  if (!book) notFound();
+  if (!book || book.detailPage === false) notFound();
 
   return (
     <div className="min-h-screen py-20 px-4">

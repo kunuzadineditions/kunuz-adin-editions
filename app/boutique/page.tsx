@@ -41,6 +41,8 @@ export default function BoutiquePage() {
                 slug={book.slug}
                 title={book.title}
                 price={book.price}
+                originalPrice={book.originalPrice}
+                linkedTitle={book.detailPage !== false}
                 seriesLabel={book.seriesLabel}
                 companion={book.companion}
                 summaryShort={book.summaryShort}

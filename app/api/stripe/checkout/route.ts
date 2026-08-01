@@ -3,6 +3,7 @@ import Stripe from "stripe";
 const ALLOWED_PRICES = new Set([
   process.env.STRIPE_PRICE_LIVRE1,
   process.env.STRIPE_PRICE_CARNET,
+  process.env.STRIPE_PRICE_PACK,
 ]);
 
 type LineItem = { priceId: string; quantity: number };

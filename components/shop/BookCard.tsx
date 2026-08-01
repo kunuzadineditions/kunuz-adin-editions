@@ -16,6 +16,8 @@ interface BookCardProps {
   slug: string;
   title: string;
   price: string;
+  originalPrice?: string;
+  linkedTitle?: boolean;
   seriesLabel: string | null;
   companion?: string;
   summaryShort: string;
@@ -29,6 +31,8 @@ export default function BookCard({
   slug,
   title,
   price,
+  originalPrice,
+  linkedTitle = true,
   seriesLabel,
   companion,
   summaryShort,
@@ -77,17 +81,30 @@ export default function BookCard({
               {seriesLabel}
             </p>
           )}
-          <Link href={`/livres/${slug}`}>
-            <h2 className="font-display text-xl sm:text-2xl text-text leading-snug hover:text-gold transition-colors duration-300 mb-1">
+          {linkedTitle ? (
+            <Link href={`/livres/${slug}`}>
+              <h2 className="font-display text-xl sm:text-2xl text-text leading-snug hover:text-gold transition-colors duration-300 mb-1">
+                {title}
+              </h2>
+            </Link>
+          ) : (
+            <h2 className="font-display text-xl sm:text-2xl text-text leading-snug mb-1">
               {title}
             </h2>
-          </Link>
+          )}
           {companion && (
             <p className="text-[11px] text-text-secondary/60 italic mb-2">
               Compagnon du livre {companion}
             </p>
           )}
-          <p className="font-display text-2xl text-gold mb-3">{price}</p>
+          <div className="flex items-baseline gap-3 mb-3">
+            {originalPrice && (
+              <span className="font-display text-lg text-text-secondary/40 line-through">
+                {originalPrice}
+              </span>
+            )}
+            <p className="font-display text-2xl text-gold">{price}</p>
+          </div>
           <p className="text-text-secondary text-sm leading-relaxed max-w-lg">
             {summaryShort}
           </p>

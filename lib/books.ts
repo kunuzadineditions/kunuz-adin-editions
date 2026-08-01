@@ -14,6 +14,8 @@ export type Book = {
   series: string | null;
   seriesLabel: string | null;
   price: string;
+  originalPrice?: string;
+  detailPage?: boolean;
   summaryShort: string;
   summaryLong: string[];
   purchaseLinks: PurchaseLink[];
@@ -86,6 +88,28 @@ export const books: Book[] = [
     pages: 128,
     coverColor: "#0E1210",
     coverImage: "/images/covers/carnet-cover.jpg",
+  },
+  {
+    slug: "pack-livre-carnet",
+    title: "Pack — Livre + Carnet",
+    series: "coeur-vivant",
+    seriesLabel: "Cœur Vivant",
+    price: "30 €",
+    originalPrice: "43,40 €",
+    detailPage: false,
+    summaryShort:
+      "Le livre Tu pries, mais tu ne t'apaises pas + le carnet Cœur Vivant. Les deux volumes réunis pour accompagner ton cheminement.",
+    summaryLong: [],
+    purchaseLinks: [
+      {
+        label: "Commander", sublabel: "Pack complet", url: "#", icon: "book", primary: true,
+        stripePrice: process.env.STRIPE_PRICE_PACK,
+      },
+    ],
+    isbn: "",
+    format: "",
+    pages: 0,
+    coverColor: "#0D0C08",
   },
 ];
 
