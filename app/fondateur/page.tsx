@@ -36,7 +36,7 @@ const STEPS = [
   {
     icon: Star,
     title: "Payez au lancement",
-    desc: "38€ uniquement à la date de lancement. Privilèges garantis à vie.",
+    desc: "30€ uniquement à la date de lancement. Privilèges garantis à vie.",
   },
 ];
 
@@ -119,7 +119,7 @@ export default function FondateurPage() {
           >
             <div>
               <p className="text-[#C9A84C] text-xs uppercase tracking-widest mb-1">Inscription gratuite</p>
-              <p className="text-zinc-400 text-xs">Paiement de 38€ uniquement au lancement officiel.</p>
+              <p className="text-zinc-400 text-xs">Paiement de 30€ uniquement au lancement officiel.</p>
             </div>
 
             <div className="space-y-4">
@@ -188,7 +188,7 @@ export default function FondateurPage() {
             </button>
 
             <p className="text-zinc-600 text-xs text-center">
-              Inscription gratuite · Paiement de 38€ uniquement au lancement officiel
+              Inscription gratuite · Paiement de 30€ uniquement au lancement officiel
             </p>
           </form>
         )}
@@ -236,7 +236,7 @@ export default function FondateurPage() {
         <div className="bg-[#C9A84C]/5 border border-[#C9A84C]/20 rounded-2xl p-5 flex items-center justify-between">
           <div>
             <p className="text-sm text-zinc-400">Prix Pack Fondateur</p>
-            <p className="text-2xl font-bold">38<span className="text-[#C9A84C]">€</span></p>
+            <p className="text-2xl font-bold">30<span className="text-[#C9A84C]">€</span></p>
           </div>
           <div className="text-right">
             <p className="text-xs text-[#C9A84C] mb-0.5">Vous économisez</p>
@@ -307,7 +307,7 @@ export default function FondateurPage() {
           <ChevronRight size={18} />
         </button>
         <p className="text-zinc-600 text-xs mt-3">
-          Inscription gratuite · Paiement de 38€ uniquement au lancement officiel
+          Inscription gratuite · Paiement de 30€ uniquement au lancement officiel
         </p>
       </section>
 

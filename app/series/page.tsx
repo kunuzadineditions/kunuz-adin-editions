@@ -32,7 +32,7 @@ export default function SeriesListPage() {
         {/* Series list */}
         <div className="flex flex-col gap-20">
           {seriesMeta.map((s) => {
-            const seriesBooks = getBooksBySeries(s.slug);
+            const seriesBooks = getBooksBySeries(s.slug).filter((b) => b.detailPage !== false);
             return (
               <div key={s.slug}>
                 {/* Series header */}

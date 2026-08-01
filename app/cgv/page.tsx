@@ -27,17 +27,7 @@ export default function CGVPage() {
           <div className="h-px w-24 bg-gold-dark mt-8" />
         </div>
 
-        {/* Bannière document en cours */}
-        <div className="border border-gold/30 bg-gold/5 rounded-lg px-5 py-4 mb-12">
-          <p className="text-gold text-xs tracking-widest uppercase mb-1">Document en cours de finalisation</p>
-          <p className="text-text-secondary text-sm leading-relaxed">
-            Ces conditions générales de vente sont publiées à titre indicatif avant l&rsquo;ouverture
-            officielle de la boutique. Elles seront complétées et définitivement validées
-            au moment du lancement des ventes.
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-10 text-text-secondary text-sm leading-relaxed">
+<div className="flex flex-col gap-10 text-text-secondary text-sm leading-relaxed">
 
           <Section title="1. Vendeur">
             <dl className="flex flex-col gap-3">

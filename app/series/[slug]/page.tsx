@@ -25,7 +25,7 @@ export default async function SeriesPage(props: PageProps<"/series/[slug]">) {
   const s = getSeriesBySlug(slug);
   if (!s) notFound();
 
-  const seriesBooks = getBooksBySeries(slug);
+  const seriesBooks = getBooksBySeries(slug).filter((b) => b.detailPage !== false);
 
   return (
     <div className="min-h-screen py-20 px-4">
