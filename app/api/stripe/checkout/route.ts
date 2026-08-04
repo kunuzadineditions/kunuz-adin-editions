@@ -20,6 +20,10 @@ export async function POST(request: Request) {
     return Response.json({ error: "STRIPE_SECRET_KEY non configurée." }, { status: 500 });
   }
 
+  if (!baseUrl) {
+    return Response.json({ error: "NEXT_PUBLIC_URL non configurée sur le serveur." }, { status: 500 });
+  }
+
   const body = await request.json().catch(() => null);
 
   // Accept both { items: [...] } (cart) and { priceId, quantity } (legacy single item)
@@ -42,25 +46,32 @@ export async function POST(request: Request) {
     return Response.json({ error: `Price ID invalide : ${invalid.priceId}` }, { status: 400 });
   }
 
-  const stripe  = new Stripe(secretKey);
-  const session = await stripe.checkout.sessions.create({
-    mode:   "payment",
-    locale: "fr",
-    line_items: lineItems.map((i) => ({ price: i.priceId, quantity: i.quantity })),
-    shipping_options: [
-      { shipping_rate: "shr_1TiaLwHsvBneNqFikoyuvsqV" },
-      { shipping_rate: "shr_1TiaNzHsvBneNqFil7RRMZeC" },
-      { shipping_rate: "shr_1TiaPIHsvBneNqFi4w8p2zh2" },
-    ],
-    shipping_address_collection: {
-      allowed_countries: ["FR", "BE", "CH", "LU", "MA", "TN", "DZ", "SN", "CI"],
-    },
-    customer_creation: "if_required",
-    automatic_tax:     { enabled: true },
-    payment_method_types: ["card"],
-    success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url:  `${baseUrl}/boutique`,
-  });
+  const stripe = new Stripe(secretKey);
 
-  return Response.json({ url: session.url });
+  try {
+    const session = await stripe.checkout.sessions.create({
+      mode:   "payment",
+      locale: "fr",
+      line_items: lineItems.map((i) => ({ price: i.priceId, quantity: i.quantity })),
+      shipping_options: [
+        { shipping_rate: "shr_1TiaLwHsvBneNqFikoyuvsqV" },
+        { shipping_rate: "shr_1TiaNzHsvBneNqFil7RRMZeC" },
+        { shipping_rate: "shr_1TiaPIHsvBneNqFi4w8p2zh2" },
+      ],
+      shipping_address_collection: {
+        allowed_countries: ["FR", "BE", "CH", "LU", "MA", "TN", "DZ", "SN", "CI"],
+      },
+      customer_creation: "if_required",
+      automatic_tax:     { enabled: true },
+      payment_method_types: ["card"],
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url:  `${baseUrl}/boutique`,
+    });
+
+    return Response.json({ url: session.url });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Erreur Stripe inconnue";
+    console.error("[checkout] Stripe error:", message);
+    return Response.json({ error: `Erreur paiement : ${message}` }, { status: 500 });
+  }
 }
