@@ -30,6 +30,15 @@ export default function BoutiquePage() {
           <div className="h-px w-24 bg-gold-dark mt-8" />
         </div>
 
+        {/* Expédition */}
+        <div className="flex items-center gap-3 border border-gold-dark/30 px-5 py-3 mb-10">
+          <div className="w-1 h-1 rounded-full bg-gold-dark flex-shrink-0" />
+          <p className="text-xs text-text-secondary leading-snug">
+            Les commandes seront expédiées au plus tard le{" "}
+            <span className="text-gold">15 août 2026</span>, in shā&rsquo; Allah.
+          </p>
+        </div>
+
         {/* Books */}
         <div className="flex flex-col gap-6 mb-24">
           {books.map((book) => {

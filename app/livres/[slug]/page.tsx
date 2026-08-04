@@ -175,6 +175,10 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
                 )
               )}
             </div>
+
+            <p className="text-[11px] text-text-secondary/50 leading-snug border-l border-gold-dark/40 pl-3">
+              Expédition au plus tard le 15 août 2026, in shā&rsquo; Allah.
+            </p>
           </div>
 
           {/* Content column */}
