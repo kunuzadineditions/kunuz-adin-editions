@@ -60,7 +60,6 @@ export default function BoutiquePage() {
                 summaryShort={book.summaryShort}
                 coverColor={book.coverColor}
                 coverImage={book.coverImage}
-                coverImages={book.coverImages}
                 primaryLink={{
                   label:       primary.label,
                   sublabel:    primary.sublabel,

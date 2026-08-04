@@ -24,7 +24,6 @@ export type Book = {
   pages: number;
   coverColor: string;
   coverImage?: string;
-  coverImages?: string[];
   extractPdf?: string;
   flipbookPages?: string[];
 };
@@ -111,11 +110,7 @@ export const books: Book[] = [
     format: "",
     pages: 0,
     coverColor: "#0D0C08",
-    coverImage: "/images/covers/tu-pries-cover.jpg",
-    coverImages: [
-      "/images/covers/tu-pries-cover.jpg",
-      "/images/covers/carnet-cover.jpg",
-    ],
+    coverImage: "/images/covers/pack-cover.jpg",
   },
 ];
 
