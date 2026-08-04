@@ -4,12 +4,10 @@ const footerLinks = {
   Catalogue: [
     { href: "/livres", label: "Tous les livres" },
     { href: "/series", label: "Séries" },
-    { href: "/nouveautes", label: "Nouveautés" },
   ],
   Maison: [
     { href: "/auteur", label: "Ahmed K." },
     { href: "/blog", label: "Blog" },
-    { href: "/a-propos", label: "À propos" },
   ],
   Boutique: [
     { href: "/boutique", label: "Commander" },

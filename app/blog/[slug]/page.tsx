@@ -21,14 +21,6 @@ export async function generateMetadata(
   };
 }
 
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("fr-FR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
-
 export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
   const { slug } = await props.params;
   const post = getPostBySlug(slug);
@@ -59,13 +51,6 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
             <span className="text-[10px] tracking-[0.25em] text-gold uppercase">
               {post.category}
             </span>
-            <span className="text-border">·</span>
-            <time
-              dateTime={post.date}
-              className="text-[10px] tracking-widest text-text-secondary/60 uppercase"
-            >
-              {formatDate(post.date)}
-            </time>
             <span className="text-border">·</span>
             <span className="text-[10px] tracking-widest text-text-secondary/60 uppercase">
               {post.readingTime}

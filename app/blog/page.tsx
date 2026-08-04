@@ -8,14 +8,6 @@ export const metadata: Metadata = {
     "Articles de KUNUZ ADIN Éditions sur la psychologie du cœur, la spiritualité islamique et la tradition classique.",
 };
 
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("fr-FR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
-
 export default function BlogPage() {
   const sorted = [...posts].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -51,13 +43,6 @@ export default function BlogPage() {
                   <span className="text-[10px] tracking-[0.25em] text-gold uppercase">
                     {post.category}
                   </span>
-                  <span className="text-border">·</span>
-                  <time
-                    dateTime={post.date}
-                    className="text-[10px] tracking-widest text-text-secondary/60 uppercase"
-                  >
-                    {formatDate(post.date)}
-                  </time>
                   <span className="text-border">·</span>
                   <span className="text-[10px] tracking-widest text-text-secondary/60 uppercase">
                     {post.readingTime}
