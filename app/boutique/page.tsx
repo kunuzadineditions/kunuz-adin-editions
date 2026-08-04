@@ -30,12 +30,17 @@ export default function BoutiquePage() {
           <div className="h-px w-24 bg-gold-dark mt-8" />
         </div>
 
-        {/* Expédition */}
-        <div className="flex items-center gap-3 border border-gold-dark/30 px-5 py-3 mb-10">
-          <div className="w-1 h-1 rounded-full bg-gold-dark flex-shrink-0" />
-          <p className="text-xs text-text-secondary leading-snug">
-            Les commandes seront expédiées au plus tard le{" "}
-            <span className="text-gold">15 août 2026</span>, in shā&rsquo; Allah.
+        {/* Bandeau de lancement */}
+        <div className="border border-gold/40 bg-gold/5 px-6 py-5 mb-10 text-center">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <div className="h-px w-8 bg-gold-dark" />
+            <div className="w-1 h-1 rounded-full bg-gold" />
+            <div className="h-px w-8 bg-gold-dark" />
+          </div>
+          <p className="font-display text-sm sm:text-base text-text leading-relaxed">
+            <span className="text-gold">Al hamdulillah</span>, les commandes sont ouvertes.{" "}
+            Bismillah, premières expéditions le{" "}
+            <span className="text-gold">15 août 2026</span> au plus tard, in shā&rsquo; Allah.
           </p>
         </div>
 
@@ -57,6 +62,7 @@ export default function BoutiquePage() {
                 summaryShort={book.summaryShort}
                 coverColor={book.coverColor}
                 coverImage={book.coverImage}
+                coverImages={book.coverImages}
                 primaryLink={{
                   label:       primary.label,
                   sublabel:    primary.sublabel,

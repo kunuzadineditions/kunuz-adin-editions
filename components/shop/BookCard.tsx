@@ -23,6 +23,7 @@ interface BookCardProps {
   summaryShort: string;
   coverColor: string;
   coverImage?: string;
+  coverImages?: string[];
   primaryLink: PurchaseLinkProps;
   secondaryLink?: PurchaseLinkProps;
 }
@@ -38,6 +39,7 @@ export default function BookCard({
   summaryShort,
   coverColor,
   coverImage,
+  coverImages,
   primaryLink,
   secondaryLink,
 }: BookCardProps) {
@@ -56,7 +58,17 @@ export default function BookCard({
           boxShadow: "inset 0 0 0 1px rgba(201,168,76,0.15), 4px 6px 24px rgba(0,0,0,0.6)",
         }}
       >
-        {coverImage ? (
+        {coverImages && coverImages.length >= 2 ? (
+          <div className="absolute inset-0 flex">
+            <div className="relative flex-1 overflow-hidden">
+              <Image src={coverImages[0]} alt={title} fill className="object-cover" sizes="64px" />
+            </div>
+            <div className="w-px bg-gold-dark/20 flex-shrink-0" />
+            <div className="relative flex-1 overflow-hidden">
+              <Image src={coverImages[1]} alt={title} fill className="object-cover" sizes="64px" />
+            </div>
+          </div>
+        ) : coverImage ? (
           <Image
             src={coverImage}
             alt={title}
