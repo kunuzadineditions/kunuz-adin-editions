@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -44,15 +45,21 @@ export default function AuteurPage() {
 
           {/* Main bio */}
           <div>
-            {/* Portrait placeholder */}
+            {/* Portrait */}
             <div
-              className="w-full sm:w-72 aspect-square mb-10 flex items-end p-6 border border-border"
-              style={{ background: "linear-gradient(160deg, #1A1510 0%, #0C0C0C 100%)" }}
+              className="relative w-full sm:w-72 aspect-[3/4] mb-10 overflow-hidden"
+              style={{
+                boxShadow: "inset 0 0 0 1px rgba(201,168,76,0.2), 6px 10px 32px rgba(0,0,0,0.6)",
+              }}
             >
-              <div>
-                <div className="h-px w-8 bg-gold mb-3" />
-                <p className="font-display text-text-secondary text-sm leading-snug">Ahmed K.</p>
-              </div>
+              <Image
+                src="/images/covers/Ahmed-K.jpg"
+                alt="Ahmed K., auteur"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 288px"
+                priority
+              />
             </div>
 
             {/* Bio */}
