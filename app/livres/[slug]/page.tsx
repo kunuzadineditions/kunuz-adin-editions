@@ -213,58 +213,62 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
             </div>
 
             {/* Feuilletage */}
-            <div className="mb-12">
-              <div className="flex items-center gap-4 mb-6">
-                <p className="text-[10px] tracking-[0.25em] text-gold uppercase whitespace-nowrap">
-                  Feuilletez quelques pages
-                </p>
-                <div className="h-px flex-1 bg-border" />
+            {!book.isBundle && (
+              <div className="mb-12">
+                <div className="flex items-center gap-4 mb-6">
+                  <p className="text-[10px] tracking-[0.25em] text-gold uppercase whitespace-nowrap">
+                    Feuilletez quelques pages
+                  </p>
+                  <div className="h-px flex-1 bg-border" />
+                </div>
+                {(() => {
+                  const primaryLink =
+                    book.purchaseLinks.find((l) => l.primary) ?? book.purchaseLinks[0];
+                  if (book.flipbookPages?.length) {
+                    return (
+                      <FlipBook
+                        pages={book.flipbookPages}
+                        bookTitle={book.title}
+                        primaryLink={primaryLink}
+                      />
+                    );
+                  }
+                  if (book.extractPdf) {
+                    return (
+                      <PdfViewer
+                        src={book.extractPdf}
+                        bookTitle={book.title}
+                        primaryLink={primaryLink}
+                      />
+                    );
+                  }
+                  return (
+                    <div className="border border-border p-10 text-center">
+                      <p className="font-display text-text-secondary/50 italic text-xl">
+                        Extrait à venir
+                      </p>
+                    </div>
+                  );
+                })()}
               </div>
-              {(() => {
-                const primaryLink =
-                  book.purchaseLinks.find((l) => l.primary) ?? book.purchaseLinks[0];
-                if (book.flipbookPages?.length) {
-                  return (
-                    <FlipBook
-                      pages={book.flipbookPages}
-                      bookTitle={book.title}
-                      primaryLink={primaryLink}
-                    />
-                  );
-                }
-                if (book.extractPdf) {
-                  return (
-                    <PdfViewer
-                      src={book.extractPdf}
-                      bookTitle={book.title}
-                      primaryLink={primaryLink}
-                    />
-                  );
-                }
-                return (
-                  <div className="border border-border p-10 text-center">
-                    <p className="font-display text-text-secondary/50 italic text-xl">
-                      Extrait à venir
-                    </p>
-                  </div>
-                );
-              })()}
-            </div>
+            )}
 
             {/* Vidéo de présentation */}
-            <div className="mb-14">
-              <div className="flex items-center gap-4 mb-6">
-                <p className="text-[10px] tracking-[0.25em] text-gold uppercase whitespace-nowrap">
-                  Vidéo de présentation
-                </p>
-                <div className="h-px flex-1 bg-border" />
+            {!book.isBundle && (
+              <div className="mb-14">
+                <div className="flex items-center gap-4 mb-6">
+                  <p className="text-[10px] tracking-[0.25em] text-gold uppercase whitespace-nowrap">
+                    Vidéo de présentation
+                  </p>
+                  <div className="h-px flex-1 bg-border" />
+                </div>
+                <div className="border border-border aspect-video flex items-center justify-center">
+                  <p className="font-display text-text-secondary/50 italic text-xl">
+                    Vidéo à venir
+                  </p>
+                </div>
               </div>
-              <div className="border border-border aspect-video flex items-center justify-center">
-                <p className="font-display text-text-secondary/50 italic text-xl">
-                  Vidéo à venir
-                </p>
-              </div>
-            </div>
+            )}
 
             {/* Book details */}
             <div className="border border-border p-6 grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-8">

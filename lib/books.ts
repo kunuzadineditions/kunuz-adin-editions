@@ -16,6 +16,7 @@ export type Book = {
   price: string;
   originalPrice?: string;
   detailPage?: boolean;
+  isBundle?: boolean;
   summaryShort: string;
   summaryLong: string[];
   purchaseLinks: PurchaseLink[];
@@ -96,11 +97,12 @@ export const books: Book[] = [
     seriesLabel: "Cœur Vivant",
     price: "30 €",
     originalPrice: "43,40 €",
+    isBundle: true,
     summaryShort:
       "Le livre Tu pries, mais tu ne t'apaises pas et le carnet de cheminement Cœur Vivant, réunis pour comprendre puis avancer.",
     summaryLong: [
-      "Le Pack réunit les deux volumes de la série Cœur Vivant pour un cheminement complet.",
-      "Tu pries, mais tu ne t'apaises pas pose le diagnostic et propose le remède, issu de la tradition islamique. Le Carnet de cheminement Cœur Vivant offre l'espace pour ancrer ce travail au quotidien : réflexions guidées, extraits commentés des maîtres classiques, espaces d'écriture pour observer et transformer.",
+      "Le Pack réunit le livre Tu pries, mais tu ne t'apaises pas et le carnet de cheminement Cœur Vivant, pour un accompagnement complet.",
+      "Le livre pose le diagnostic et propose le remède, issu de la tradition islamique. Le carnet de cheminement offre l'espace pour ancrer ce travail au quotidien : réflexions guidées, extraits commentés des maîtres classiques, espaces d'écriture pour observer et transformer.",
     ],
     purchaseLinks: [
       {
