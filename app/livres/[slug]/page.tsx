@@ -194,7 +194,14 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl text-text font-light leading-tight mb-3">
               {book.title}
             </h1>
-            <p className="font-display text-3xl text-gold mb-10">{book.price}</p>
+            <div className="flex items-baseline gap-4 mb-10">
+              {book.originalPrice && (
+                <span className="font-display text-2xl text-text-secondary/40 line-through">
+                  {book.originalPrice}
+                </span>
+              )}
+              <p className="font-display text-3xl text-gold">{book.price}</p>
+            </div>
 
             <div className="h-px w-16 bg-gold-dark mb-10" />
 
@@ -261,24 +268,30 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
 
             {/* Book details */}
             <div className="border border-border p-6 grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-8">
-              <div>
-                <p className="text-[10px] tracking-[0.25em] text-gold uppercase mb-1">
-                  Format
-                </p>
-                <p className="text-text-secondary text-sm">{book.format}</p>
-              </div>
-              <div>
-                <p className="text-[10px] tracking-[0.25em] text-gold uppercase mb-1">
-                  Pages
-                </p>
-                <p className="text-text-secondary text-sm">{book.pages} pages</p>
-              </div>
-              <div>
-                <p className="text-[10px] tracking-[0.25em] text-gold uppercase mb-1">
-                  ISBN
-                </p>
-                <p className="text-text-secondary text-sm font-mono">{book.isbn}</p>
-              </div>
+              {book.format && (
+                <div>
+                  <p className="text-[10px] tracking-[0.25em] text-gold uppercase mb-1">
+                    Format
+                  </p>
+                  <p className="text-text-secondary text-sm">{book.format}</p>
+                </div>
+              )}
+              {book.pages > 0 && (
+                <div>
+                  <p className="text-[10px] tracking-[0.25em] text-gold uppercase mb-1">
+                    Pages
+                  </p>
+                  <p className="text-text-secondary text-sm">{book.pages} pages</p>
+                </div>
+              )}
+              {book.isbn && (
+                <div>
+                  <p className="text-[10px] tracking-[0.25em] text-gold uppercase mb-1">
+                    ISBN
+                  </p>
+                  <p className="text-text-secondary text-sm font-mono">{book.isbn}</p>
+                </div>
+              )}
               {book.seriesLabel && (
                 <div>
                   <p className="text-[10px] tracking-[0.25em] text-gold uppercase mb-1">

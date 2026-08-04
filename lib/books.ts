@@ -91,15 +91,17 @@ export const books: Book[] = [
   },
   {
     slug: "pack-livre-carnet",
-    title: "Pack — Livre + Carnet",
+    title: "Pack : Livre + Carnet",
     series: "coeur-vivant",
     seriesLabel: "Cœur Vivant",
     price: "30 €",
     originalPrice: "43,40 €",
-    detailPage: false,
     summaryShort:
-      "Le livre Tu pries, mais tu ne t'apaises pas + le carnet Cœur Vivant. Les deux volumes réunis pour accompagner ton cheminement.",
-    summaryLong: [],
+      "Le livre Tu pries, mais tu ne t'apaises pas et le carnet de cheminement Cœur Vivant, réunis pour comprendre puis avancer.",
+    summaryLong: [
+      "Le Pack réunit les deux volumes de la série Cœur Vivant pour un cheminement complet.",
+      "Tu pries, mais tu ne t'apaises pas pose le diagnostic et propose le remède, issu de la tradition islamique. Le Carnet de cheminement Cœur Vivant offre l'espace pour ancrer ce travail au quotidien : réflexions guidées, extraits commentés des maîtres classiques, espaces d'écriture pour observer et transformer.",
+    ],
     purchaseLinks: [
       {
         label: "Commander", sublabel: "Pack complet", url: "#", icon: "book", primary: true,
