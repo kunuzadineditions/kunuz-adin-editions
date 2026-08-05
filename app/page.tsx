@@ -74,7 +74,7 @@ export default function HomePage() {
         Al hamdulillah, la boutique est ouverte.
       </p>
       <p className="text-text-secondary text-sm sm:text-base text-center max-w-md leading-relaxed mb-10">
-        Une maison d&rsquo;édition islamique francophone, ancrée dans la tradition classique. Des livres pour nourrir le cœur et accompagner le cheminement intérieur.
+        Une maison d&rsquo;édition islamique francophone, dédiée aux sciences du cœur et à l&rsquo;histoire de l&rsquo;Islam. Des livres, et bien plus à venir <span dir="rtl" lang="ar" className="font-arabic">إن شاء الله</span>, pour nourrir la foi et accompagner le cheminement.
       </p>
 
       {/* CTA boutique */}
