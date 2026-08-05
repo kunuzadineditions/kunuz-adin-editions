@@ -5,7 +5,8 @@ import { useState } from "react";
 type Status = "idle" | "loading" | "success" | "error";
 
 export default function BoutiqueContactForm() {
-  const [status, setStatus] = useState<Status>("idle");
+  const [status,   setStatus]   = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [form, setForm] = useState({
     nom: "",
     organisation: "",
@@ -22,8 +23,26 @@ export default function BoutiqueContactForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("loading");
-    await new Promise((r) => setTimeout(r, 800));
-    setStatus("success");
+    setErrorMsg(null);
+
+    try {
+      const res  = await fetch("/api/contact", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify(form),
+      });
+
+      if (res.status === 201) {
+        setStatus("success");
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setErrorMsg(data.error ?? "Une erreur est survenue. Veuillez réessayer.");
+        setStatus("error");
+      }
+    } catch {
+      setErrorMsg("Impossible de contacter le serveur.");
+      setStatus("error");
+    }
   }
 
   if (status === "success") {
@@ -117,7 +136,7 @@ export default function BoutiqueContactForm() {
 
       {status === "error" && (
         <p className="text-red-400/70 text-xs tracking-wide">
-          Une erreur est survenue. Veuillez réessayer.
+          {errorMsg ?? "Une erreur est survenue. Veuillez réessayer."}
         </p>
       )}
 
