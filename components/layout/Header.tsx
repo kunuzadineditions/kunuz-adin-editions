@@ -10,7 +10,6 @@ const navLinks = [
   { href: "/series", label: "Séries" },
   { href: "/blog", label: "Blog" },
   { href: "/boutique", label: "Boutique" },
-  { href: "/fondateur", label: "Fondateur" },
   { href: "/livre-audio", label: "Livre Audio" },
   { href: "/auteur", label: "Auteur" },
 ];
