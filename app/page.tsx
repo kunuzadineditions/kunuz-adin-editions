@@ -8,11 +8,13 @@ type Status = "idle" | "loading" | "success" | "duplicate" | "error";
 export default function HomePage() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email || status === "loading") return;
     setStatus("loading");
+    setErrorMsg(null);
 
     try {
       const res = await fetch("/api/waitlist", {
@@ -27,9 +29,12 @@ export default function HomePage() {
       } else if (res.status === 200) {
         setStatus("duplicate");
       } else {
+        const data = await res.json().catch(() => ({}));
+        setErrorMsg(data.error ?? "Une erreur est survenue. Veuillez réessayer.");
         setStatus("error");
       }
     } catch {
+      setErrorMsg("Impossible de contacter le serveur.");
       setStatus("error");
     }
   }
@@ -139,7 +144,7 @@ export default function HomePage() {
             )}
             {status === "error" && (
               <p className="text-red-400/70 text-xs text-center mt-4 tracking-wide">
-                Une erreur est survenue. Veuillez réessayer.
+                {errorMsg ?? "Une erreur est survenue. Veuillez réessayer."}
               </p>
             )}
           </>
