@@ -2,14 +2,11 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const NOTIFY_EMAIL = "contact@kunuz-adin-editions.com";
+
 export async function POST(request: Request) {
   if (!process.env.RESEND_API_KEY) {
     return Response.json({ error: "RESEND_API_KEY non configurée." }, { status: 500 });
-  }
-
-  const adminEmail = process.env.ADMIN_EMAIL;
-  if (!adminEmail) {
-    return Response.json({ error: "ADMIN_EMAIL non configuré." }, { status: 500 });
   }
 
   const body = await request.json().catch(() => null);
@@ -25,7 +22,7 @@ export async function POST(request: Request) {
 
   const { error } = await resend.emails.send({
     from:    "KUNUZ ADIN ÉDITIONS <noreply@kunuz-adin-editions.com>",
-    to:      adminEmail,
+    to:      NOTIFY_EMAIL,
     replyTo: email,
     subject: `Commande groupée — ${organisation || nom}`,
     html: `<!DOCTYPE html>
