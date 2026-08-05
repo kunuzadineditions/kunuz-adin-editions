@@ -38,7 +38,10 @@ export default function BoutiquePage() {
             <div className="h-px w-8 bg-gold-dark" />
           </div>
           <p className="font-display text-sm sm:text-base text-text leading-relaxed">
-            <span className="text-gold">Al hamdulillah</span>, les commandes sont ouvertes. Bismillah, premières expéditions le <span className="text-gold">15 août 2026</span> au plus tard, in shā&rsquo; Allah.
+            <span className="text-gold">Al hamdulillah</span>
+            {", les commandes sont ouvertes. Bismillah, premières expéditions le "}
+            <span className="text-gold">15 août 2026</span>
+            {" au plus tard, in shā’ Allāh."}
           </p>
         </div>
 
