@@ -3,6 +3,7 @@ import Link from "next/link";
 import { books } from "@/lib/books";
 import BookCard from "@/components/shop/BookCard";
 import BoutiqueContactForm from "./BoutiqueContactForm";
+import ShareButton from "@/components/ui/ShareButton";
 
 export const metadata: Metadata = {
   title: "Commander",
@@ -27,7 +28,10 @@ export default function BoutiquePage() {
           <p className="text-text-secondary max-w-lg leading-relaxed">
             Chaque livre est disponible en version reliée sur notre site ou en version brochée sur Amazon.
           </p>
-          <div className="h-px w-24 bg-gold-dark mt-8" />
+          <div className="flex items-center justify-between mt-8">
+            <div className="h-px w-24 bg-gold-dark" />
+            <ShareButton title="KUNUZ ADIN Éditions — Boutique" />
+          </div>
         </div>
 
         {/* Bandeau de lancement */}

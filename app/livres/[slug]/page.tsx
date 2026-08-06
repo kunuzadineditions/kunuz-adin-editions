@@ -6,6 +6,7 @@ import { books, getBookBySlug } from "@/lib/books";
 import PdfViewer from "./PdfViewer";
 import FlipBook from "./FlipBook";
 import AddToCartButton from "@/components/shop/AddToCartButton";
+import ShareButton from "@/components/ui/ShareButton";
 
 export function generateStaticParams() {
   return books.filter((b) => b.detailPage !== false).map((b) => ({ slug: b.slug }));
@@ -194,13 +195,16 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl text-text font-light leading-tight mb-3">
               {book.title}
             </h1>
-            <div className="flex items-baseline gap-4 mb-10">
-              {book.originalPrice && (
-                <span className="font-display text-2xl text-text-secondary/40 line-through">
-                  {book.originalPrice}
-                </span>
-              )}
-              <p className="font-display text-3xl text-gold">{book.price}</p>
+            <div className="flex items-center justify-between mb-10">
+              <div className="flex items-baseline gap-4">
+                {book.originalPrice && (
+                  <span className="font-display text-2xl text-text-secondary/40 line-through">
+                    {book.originalPrice}
+                  </span>
+                )}
+                <p className="font-display text-3xl text-gold">{book.price}</p>
+              </div>
+              <ShareButton title={book.title} />
             </div>
 
             <div className="h-px w-16 bg-gold-dark mb-10" />

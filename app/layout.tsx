@@ -34,6 +34,15 @@ export const metadata: Metadata = {
   description:
     "Maison d'édition islamique francophone fondée par Ahmed K. Livres, séries et ressources pour la communauté musulmane francophone.",
   keywords: ["islam", "livres islamiques", "éditions", "francophone", "kunuz adin"],
+  icons: {
+    icon: [
+      { url: "/favicons/favicon-16.png?v=2", sizes: "16x16", type: "image/png" },
+      { url: "/favicons/favicon-32.png?v=2", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/favicons/apple-touch-icon.png?v=2", sizes: "180x180", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({

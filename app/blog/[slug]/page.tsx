@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { posts, getPostBySlug } from "@/content/blog/_index";
+import ShareButton from "@/components/ui/ShareButton";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -65,7 +66,10 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
             {post.excerpt}
           </p>
 
-          <div className="h-px w-16 bg-gold-dark mt-8" />
+          <div className="flex items-center justify-between mt-8">
+            <div className="h-px w-16 bg-gold-dark" />
+            <ShareButton title={post.title} />
+          </div>
         </header>
 
         {/* MDX content */}

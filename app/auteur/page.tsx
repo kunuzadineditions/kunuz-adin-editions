@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import ShareButton from "@/components/ui/ShareButton";
 
 export const metadata: Metadata = {
   title: "Ahmed K. · Auteur",
@@ -38,7 +39,10 @@ export default function AuteurPage() {
           <p className="text-text-secondary tracking-widest text-sm uppercase">
             Auteur · Réalisateur · Fondateur
           </p>
-          <div className="h-px w-24 bg-gold-dark mt-8" />
+          <div className="flex items-center justify-between mt-8">
+            <div className="h-px w-24 bg-gold-dark" />
+            <ShareButton title="Ahmed K. · Auteur · KUNUZ ADIN Éditions" />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-14 lg:gap-16 items-start">
