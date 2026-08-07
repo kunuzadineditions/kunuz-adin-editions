@@ -11,6 +11,7 @@ const SERIES = [
   {id:5, title:'14 Objectifs du Hajj & Omra'},
   {id:6, title:'Les 40 Hadîths — Imam An-Nawawi'},
   {id:7, title:'Le Rappel profite au Croyant'},
+  {id:8, title:'Le Qur\'an — Les 114 Sourates'},
   {id:9, title:'Quiz Aqida'},
   {id:10, title:"Le Sentier de l'Islam"},
   {id:11, title:'Les Mérites de la Polygamie'},
@@ -18,7 +19,7 @@ const SERIES = [
 
 function detectSeriesId(title:string, imageUrl:string):number {
   const img = imageUrl.toLowerCase();
-  if (img.includes('sourate') || title.toLowerCase().includes('sourate')) return 0;
+  if (img.includes('sourate') || title.toLowerCase().includes('sourate')) return 8;
   const letters = title.replace(/[^a-zA-ZÀ-ÿ]/g,'');
   const upper = letters.replace(/[^A-ZÀÂÄÉÈÊËÎÏÔÖÙÛÜŸÆŒ]/g,'').length;
   if (letters.length > 2 && upper/letters.length > 0.8) return 1;
