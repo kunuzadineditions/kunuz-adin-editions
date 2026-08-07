@@ -191,9 +191,7 @@ export default function CartDrawer() {
             </p>
 
             <p className="text-[11px] text-text-secondary/60 leading-snug border-l border-gold-dark/40 pl-3">
-              {"Expédition au plus tard le "}
-              <span className="text-text-secondary">{"15 août 2026"}</span>
-              {", in shā' Allāh."}
+              {"Commandes expédiées rapidement, in shā' Allah."}
             </p>
 
             {/* Checkout CTA */}

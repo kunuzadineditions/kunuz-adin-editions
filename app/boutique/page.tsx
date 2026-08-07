@@ -43,9 +43,7 @@ export default function BoutiquePage() {
           </div>
           <p className="font-display text-sm sm:text-base text-text leading-relaxed">
             <span className="text-gold">Al hamdulillah</span>
-            {", les commandes sont ouvertes. Bismillah, premières expéditions le "}
-            <span className="text-gold">15 août 2026</span>
-            {" au plus tard, in shā’ Allāh."}
+            {", les commandes sont ouvertes. Commandes expédiées rapidement, in shā’ Allah."}
           </p>
         </div>
 
