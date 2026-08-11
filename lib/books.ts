@@ -142,8 +142,8 @@ export const books: Book[] = [
     coverImage: "/images/covers/pack-cover.jpg",
     galleryImages: [
       "/images/covers/pack-cover.jpg",
-      "/images/pack-fondateur/1.png",
-      "/images/pack-fondateur/2.jpeg",
+      "/images/pack-fondateur/1.jpeg",
+      "/images/pack-fondateur/2.png",
       "/images/pack-fondateur/3.png",
       "/images/pack-fondateur/4.png",
       "/images/pack-fondateur/5.png",
@@ -153,9 +153,8 @@ export const books: Book[] = [
       "/images/pack-fondateur/9.png",
       "/images/pack-fondateur/10.png",
       "/images/pack-fondateur/11.png",
-      "/images/pack-fondateur/12.png",
+      "/images/pack-fondateur/12.jpeg",
       "/images/pack-fondateur/13.png",
-      "/images/pack-fondateur/14.jpeg",
     ],
   },
 ];
