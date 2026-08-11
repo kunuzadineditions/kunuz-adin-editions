@@ -87,7 +87,6 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
               <BookGallery
                 images={book.galleryImages}
                 title={book.title}
-                coverColor={book.coverColor}
               />
             ) : (
               <div

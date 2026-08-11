@@ -6,10 +6,9 @@ import Image from "next/image";
 interface Props {
   images: string[];
   title: string;
-  coverColor: string;
 }
 
-export default function BookGallery({ images, title, coverColor }: Props) {
+export default function BookGallery({ images, title }: Props) {
   const [active, setActive] = useState(0);
 
   return (
@@ -17,10 +16,7 @@ export default function BookGallery({ images, title, coverColor }: Props) {
       {/* Main image */}
       <div
         className="relative w-full aspect-[3/4] overflow-hidden"
-        style={{
-          backgroundColor: coverColor,
-          boxShadow: "8px 12px 40px rgba(0,0,0,0.7)",
-        }}
+        style={{ boxShadow: "8px 12px 40px rgba(0,0,0,0.7)" }}
       >
         <Image
           src={images[active]}
@@ -45,7 +41,6 @@ export default function BookGallery({ images, title, coverColor }: Props) {
                   ? "opacity-100"
                   : "opacity-40 hover:opacity-70"
               }`}
-              style={{ backgroundColor: coverColor }}
             >
               <Image
                 src={src}
