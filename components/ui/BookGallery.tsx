@@ -26,7 +26,7 @@ export default function BookGallery({ images, title, coverColor }: Props) {
           src={images[active]}
           alt={active === 0 ? title : `${title} — image ${active + 1}`}
           fill
-          className="object-cover"
+          className="object-contain"
           sizes="(max-width: 1024px) 208px, 280px"
           priority={active === 0}
         />
@@ -51,7 +51,7 @@ export default function BookGallery({ images, title, coverColor }: Props) {
                 src={src}
                 alt=""
                 fill
-                className="object-cover"
+                className="object-contain"
                 sizes="44px"
               />
             </button>
