@@ -19,7 +19,7 @@ export default function BookGallery({ images, title, coverColor }: Props) {
         className="relative w-full aspect-[3/4] overflow-hidden"
         style={{
           backgroundColor: coverColor,
-          boxShadow: "inset 0 0 0 1px rgba(201,168,76,0.15), 8px 12px 40px rgba(0,0,0,0.7)",
+          boxShadow: "8px 12px 40px rgba(0,0,0,0.7)",
         }}
       >
         <Image
@@ -42,8 +42,8 @@ export default function BookGallery({ images, title, coverColor }: Props) {
               aria-label={`Image ${i + 1}`}
               className={`relative flex-shrink-0 w-11 h-[58px] overflow-hidden transition-opacity duration-200 outline-none ${
                 i === active
-                  ? "ring-1 ring-gold opacity-100"
-                  : "ring-1 ring-border opacity-40 hover:opacity-70"
+                  ? "opacity-100"
+                  : "opacity-40 hover:opacity-70"
               }`}
               style={{ backgroundColor: coverColor }}
             >
