@@ -25,6 +25,7 @@ export type Book = {
   pages: number;
   coverColor: string;
   coverImage?: string;
+  galleryImages?: string[];
   extractPdf?: string;
   flipbookPages?: string[];
 };
@@ -57,6 +58,17 @@ export const books: Book[] = [
     pages: 278,
     coverColor: "#13100A",
     coverImage: "/images/covers/tu-pries-cover.jpg",
+    galleryImages: [
+      "/images/covers/tu-pries-cover.jpg",
+      "/images/tu-pries/1.jpg",
+      "/images/tu-pries/2.png",
+      "/images/tu-pries/3.png",
+      "/images/tu-pries/4.png",
+      "/images/tu-pries/5.png",
+      "/images/tu-pries/6.png",
+      "/images/tu-pries/7.jpeg",
+      "/images/tu-pries/8.png",
+    ],
     extractPdf: "/extraits/extrait-tu-pries.pdf",
     flipbookPages: Array.from({ length: 20 }, (_, i) =>
       `/extraits/pages/page-${String(i + 1).padStart(2, "0")}.jpg`
@@ -89,6 +101,19 @@ export const books: Book[] = [
     pages: 181,
     coverColor: "#0E1210",
     coverImage: "/images/covers/carnet-cover.jpg",
+    galleryImages: [
+      "/images/covers/carnet-cover.jpg",
+      "/images/coeur/1.png",
+      "/images/coeur/2.jpeg",
+      "/images/coeur/3.png",
+      "/images/coeur/4.png",
+      "/images/coeur/5.png",
+      "/images/coeur/6.png",
+      "/images/coeur/7.png",
+      "/images/coeur/8.png",
+      "/images/coeur/9.jpeg",
+      "/images/coeur/10.png",
+    ],
   },
   {
     slug: "pack-livre-carnet",
@@ -115,6 +140,23 @@ export const books: Book[] = [
     pages: 0,
     coverColor: "#0D0C08",
     coverImage: "/images/covers/pack-cover.jpg",
+    galleryImages: [
+      "/images/covers/pack-cover.jpg",
+      "/images/pack-fondateur/1.png",
+      "/images/pack-fondateur/2.jpeg",
+      "/images/pack-fondateur/3.png",
+      "/images/pack-fondateur/4.png",
+      "/images/pack-fondateur/5.png",
+      "/images/pack-fondateur/6.png",
+      "/images/pack-fondateur/7.png",
+      "/images/pack-fondateur/8.png",
+      "/images/pack-fondateur/9.png",
+      "/images/pack-fondateur/10.png",
+      "/images/pack-fondateur/11.png",
+      "/images/pack-fondateur/12.png",
+      "/images/pack-fondateur/13.png",
+      "/images/pack-fondateur/14.jpeg",
+    ],
   },
 ];
 

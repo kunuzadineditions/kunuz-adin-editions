@@ -7,6 +7,7 @@ import PdfViewer from "./PdfViewer";
 import FlipBook from "./FlipBook";
 import AddToCartButton from "@/components/shop/AddToCartButton";
 import ShareButton from "@/components/ui/ShareButton";
+import BookGallery from "@/components/ui/BookGallery";
 
 export function generateStaticParams() {
   return books.filter((b) => b.detailPage !== false).map((b) => ({ slug: b.slug }));
@@ -81,45 +82,53 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
         <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-12 lg:gap-20 items-start">
           {/* Cover column */}
           <div className="lg:sticky lg:top-28 flex flex-col items-center lg:items-start gap-6">
-            {/* Cover */}
-            <div
-              className="relative w-52 lg:w-full max-w-[280px] aspect-[3/4] overflow-hidden flex flex-col items-center justify-center text-center p-8"
-              style={{
-                backgroundColor: book.coverColor,
-                boxShadow:
-                  "inset 0 0 0 1px rgba(201,168,76,0.15), 8px 12px 40px rgba(0,0,0,0.7)",
-              }}
-            >
-              {book.coverImage ? (
-                <Image
-                  src={book.coverImage}
-                  alt={book.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 208px, 280px"
-                  priority
-                />
-              ) : (
-                <>
-                  {book.seriesLabel && (
-                    <p className="text-[10px] tracking-[0.3em] text-gold-dark uppercase mb-5">
-                      {book.seriesLabel}
+            {/* Cover / Gallery */}
+            {book.galleryImages?.length ? (
+              <BookGallery
+                images={book.galleryImages}
+                title={book.title}
+                coverColor={book.coverColor}
+              />
+            ) : (
+              <div
+                className="relative w-52 lg:w-full max-w-[280px] aspect-[3/4] overflow-hidden flex flex-col items-center justify-center text-center p-8"
+                style={{
+                  backgroundColor: book.coverColor,
+                  boxShadow:
+                    "inset 0 0 0 1px rgba(201,168,76,0.15), 8px 12px 40px rgba(0,0,0,0.7)",
+                }}
+              >
+                {book.coverImage ? (
+                  <Image
+                    src={book.coverImage}
+                    alt={book.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 208px, 280px"
+                    priority
+                  />
+                ) : (
+                  <>
+                    {book.seriesLabel && (
+                      <p className="text-[10px] tracking-[0.3em] text-gold-dark uppercase mb-5">
+                        {book.seriesLabel}
+                      </p>
+                    )}
+                    <div className="h-px w-10 bg-gold mb-5" />
+                    <p
+                      className="font-display text-gold text-lg leading-snug"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      {book.title}
                     </p>
-                  )}
-                  <div className="h-px w-10 bg-gold mb-5" />
-                  <p
-                    className="font-display text-gold text-lg leading-snug"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {book.title}
-                  </p>
-                  <div className="h-px w-10 bg-gold mt-5" />
-                  <p className="text-[10px] tracking-widest text-gold-dark uppercase mt-5">
-                    KUNUZ ADIN
-                  </p>
-                </>
-              )}
-            </div>
+                    <div className="h-px w-10 bg-gold mt-5" />
+                    <p className="text-[10px] tracking-widest text-gold-dark uppercase mt-5">
+                      KUNUZ ADIN
+                    </p>
+                  </>
+                )}
+              </div>
+            )}
 
             {/* Purchase links */}
             <div className="w-full max-w-[320px] flex flex-col gap-3">
