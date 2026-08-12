@@ -339,6 +339,19 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
                 ← Retour au catalogue
               </Link>
             </div>
+
+            {/* Invitation Livre d'or */}
+            <div className="mt-12 pt-10 border-t border-border">
+              <p className="text-text-secondary/60 text-sm leading-relaxed">
+                Ce livre vous a touché ?{" "}
+                <Link
+                  href="/livre-d-or"
+                  className="text-gold hover:text-gold-light transition-colors duration-300 underline underline-offset-4 decoration-gold/30"
+                >
+                  Partagez ce qu'il vous a apporté
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
