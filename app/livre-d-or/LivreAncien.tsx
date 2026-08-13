@@ -9,16 +9,6 @@ export type Temoignage = {
   message: string;
 };
 
-function Ornament() {
-  return (
-    <div className="flex items-center gap-3 w-full">
-      <div className="h-px flex-1 bg-gold-dark/60" />
-      <span className="text-[8px] text-gold-dark">✦</span>
-      <div className="h-px flex-1 bg-gold-dark/60" />
-    </div>
-  );
-}
-
 export default function LivreAncien({ temoignages }: { temoignages: Temoignage[] }) {
   const [isOpen, setIsOpen]       = useState(false);
   const [isOpening, setIsOpening] = useState(false);
@@ -90,73 +80,87 @@ export default function LivreAncien({ temoignages }: { temoignages: Temoignage[]
       {!isOpen ? (
         /* ── COUVERTURE ── */
         <div
-          className={isOpening ? "livre-cover-open" : ""}
+          className={`relative overflow-hidden${isOpening ? " livre-cover-open" : ""}`}
           style={{
             width: "min(340px, 100%)",
-            background: "#0D0D0D",
-            border: "1px solid rgba(201,168,76,0.35)",
-            boxShadow:
-              "0 24px 64px rgba(0,0,0,0.9), 0 8px 32px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(201,168,76,0.06)",
+            aspectRatio: "2/3",
+            boxShadow: "0 24px 64px rgba(0,0,0,0.9), 0 8px 32px rgba(0,0,0,0.6)",
           }}
         >
-          <div className="flex flex-col items-center text-center px-10 py-14 gap-5">
-            <Ornament />
+          {/* Image de couverture */}
+          <Image
+            src="/images/couverture-livre-dor.png"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="340px"
+            priority
+          />
 
-            {/* Logo — placer le fichier dans public/images/logo-livre-dor.png */}
-            <div className="relative w-16 h-16">
+          {/* Textes dans la zone centrale de l'arche — padding calibré pour rester hors du cadre doré */}
+          <div
+            className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center gap-4"
+            style={{ padding: "8% 17%" }}
+          >
+            {/* Logo */}
+            <div className="relative w-14 h-14">
               <Image
                 src="/images/logo-livre-dor.png"
                 alt="KUNUZ ADIN ÉDITIONS"
                 fill
                 className="object-contain"
-                sizes="64px"
+                sizes="56px"
               />
             </div>
 
-            <p className="text-[9px] tracking-[0.35em] text-gold-dark uppercase">
+            <p
+              className="text-[9px] tracking-[0.35em] uppercase"
+              style={{ color: "#8B6914", textShadow: "0 1px 4px rgba(0,0,0,0.9)" }}
+            >
               KUNUZ ADIN ÉDITIONS
             </p>
 
-            <Ornament />
-
             <h2
-              className="font-display font-light leading-none mt-1"
-              style={{ fontSize: 42, color: "#C9A84C" }}
+              className="font-display font-light leading-none"
+              style={{ fontSize: 38, color: "#C9A84C", textShadow: "0 2px 8px rgba(0,0,0,0.9)" }}
             >
               Livre d'or
             </h2>
 
-            <p className="font-display text-base text-text-secondary italic font-light">
+            <p
+              className="font-display text-sm italic font-light"
+              style={{ color: "#A89F8C", textShadow: "0 1px 4px rgba(0,0,0,0.9)" }}
+            >
               Paroles de cœurs
             </p>
 
             {/* Inscription arabe — texte fourni verbatim, ne pas modifier */}
             <p
-              className="mt-1"
               dir="rtl"
               lang="ar"
               style={{
                 fontFamily: "var(--font-amiri)",
-                fontSize: 22,
-                color: "rgba(201,168,76,0.65)",
+                fontSize: 20,
+                color: "rgba(201,168,76,0.7)",
+                textShadow: "0 2px 8px rgba(0,0,0,0.9)",
               }}
             >
               دفتر القلوب
             </p>
 
-            <div className="mt-1 w-full">
-              <Ornament />
-            </div>
-
             <button
               onClick={openBook}
               disabled={isOpening}
-              className="mt-2 px-7 py-2.5 border border-gold/40 text-gold text-[9px] tracking-[0.3em] uppercase hover:bg-gold/10 transition-colors duration-300 disabled:opacity-40"
+              className="mt-1 px-6 py-2 border border-gold/50 text-gold text-[9px] tracking-[0.3em] uppercase hover:bg-gold/10 transition-colors duration-300 disabled:opacity-40"
+              style={{ backdropFilter: "blur(2px)" }}
             >
               Ouvrir le livre
             </button>
 
-            <p className="text-[9px] tracking-[0.3em] text-text-secondary/30 uppercase">
+            <p
+              className="text-[8px] tracking-[0.25em] uppercase"
+              style={{ color: "rgba(168,159,140,0.5)" }}
+            >
               {total} témoignage{total > 1 ? "s" : ""}
             </p>
           </div>
