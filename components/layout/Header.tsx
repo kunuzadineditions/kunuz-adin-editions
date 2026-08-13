@@ -12,6 +12,7 @@ const navLinks = [
   { href: "/boutique", label: "Boutique" },
   { href: "/livre-audio", label: "Livre Audio" },
   { href: "/auteur", label: "Auteur" },
+  { href: "/livre-d-or", label: "Livre d'or" },
 ];
 
 export default function Header() {
@@ -80,7 +81,7 @@ export default function Header() {
       {/* Mobile menu */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ${
-          menuOpen ? "max-h-80 border-t border-border" : "max-h-0"
+          menuOpen ? "max-h-[420px] border-t border-border" : "max-h-0"
         }`}
       >
         <nav className="px-4 py-6 flex flex-col gap-5" aria-label="Menu mobile">
