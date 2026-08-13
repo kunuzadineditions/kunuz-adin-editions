@@ -173,43 +173,51 @@ export default function LivreAncien({ temoignages }: { temoignages: Temoignage[]
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
-          {/* Feuille animée */}
+          {/* Feuille animée — parchemin */}
           <div
             key={pageKey}
             className={dir === "next" ? "livre-page-in-next" : "livre-page-in-prev"}
             style={{
-              background: "#0F0C08",
-              border: "1px solid rgba(201,168,76,0.2)",
-              boxShadow: "0 24px 64px rgba(0,0,0,0.9)",
+              backgroundImage: "url('/images/page-parchemin.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              border: "1px solid rgba(110,80,40,0.35)",
+              boxShadow: "0 24px 64px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(200,170,110,0.15)",
             }}
           >
             {/* En-tête */}
             <div className="px-8 pt-7 pb-4">
               <div className="flex items-center gap-2">
-                <div className="h-px flex-1 bg-gold-dark/40" />
-                <p className="text-[8px] tracking-[0.3em] text-gold-dark/60 uppercase whitespace-nowrap">
+                <div className="h-px flex-1" style={{ background: "rgba(80,55,25,0.4)" }} />
+                <p
+                  className="text-[8px] tracking-[0.3em] uppercase whitespace-nowrap"
+                  style={{ color: "rgba(80,55,25,0.65)" }}
+                >
                   Livre d'or · {pageIdx + 1}/{total}
                 </p>
-                <div className="h-px flex-1 bg-gold-dark/40" />
+                <div className="h-px flex-1" style={{ background: "rgba(80,55,25,0.4)" }} />
               </div>
             </div>
 
             {/* Corps du témoignage */}
             <div className="px-8 py-4 flex flex-col" style={{ minHeight: 220 }}>
               <p
-                className="font-display leading-none text-gold/25 -ml-1 mb-2"
+                className="font-display leading-none -ml-1 mb-2"
                 aria-hidden
-                style={{ fontSize: 52 }}
+                style={{ fontSize: 52, color: "rgba(80,55,25,0.22)", lineHeight: 1 }}
               >
                 &ldquo;
               </p>
-              <p className="font-display text-[17px] text-text italic font-light leading-relaxed">
+              <p
+                className="font-display italic font-light leading-relaxed"
+                style={{ fontSize: 17, color: "#3a2c1a" }}
+              >
                 {t.message}
               </p>
               <p
-                className="font-display leading-none text-gold/25 text-right -mr-1 mt-2"
+                className="font-display leading-none text-right -mr-1 mt-2"
                 aria-hidden
-                style={{ fontSize: 52 }}
+                style={{ fontSize: 52, color: "rgba(80,55,25,0.22)", lineHeight: 1 }}
               >
                 &rdquo;
               </p>
@@ -217,14 +225,17 @@ export default function LivreAncien({ temoignages }: { temoignages: Temoignage[]
 
             {/* Attribution */}
             <div className="px-8 pb-5">
-              <p className="text-right text-[11px] tracking-[0.2em] text-gold uppercase">
+              <p
+                className="text-right tracking-[0.2em] uppercase"
+                style={{ fontSize: 11, color: "#5c3f1c" }}
+              >
                 — {t.nom}
               </p>
             </div>
 
             {/* Pied */}
             <div className="px-8 pb-7">
-              <div className="h-px bg-gold-dark/40" />
+              <div className="h-px" style={{ background: "rgba(80,55,25,0.4)" }} />
             </div>
           </div>
 
