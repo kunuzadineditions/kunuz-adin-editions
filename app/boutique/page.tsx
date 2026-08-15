@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { books } from "@/lib/books";
+import { getPackDisplayPrice, getPackStripePrice } from "@/lib/pack-price";
 import BookCard from "@/components/shop/BookCard";
 import BoutiqueContactForm from "./BoutiqueContactForm";
 import ShareButton from "@/components/ui/ShareButton";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Commander",
@@ -11,7 +14,10 @@ export const metadata: Metadata = {
     "Commandez les livres KUNUZ ADIN Éditions, version reliée sur notre site ou brochée sur Amazon. Commandes groupées pour bibliothèques, mosquées et associations.",
 };
 
-export default function BoutiquePage() {
+export default async function BoutiquePage() {
+  const packDisplayPrice  = getPackDisplayPrice();
+  const packStripePrice   = getPackStripePrice();
+
   return (
     <div className="min-h-screen py-20 px-4">
       <div className="max-w-4xl mx-auto">
@@ -50,6 +56,7 @@ export default function BoutiquePage() {
         {/* Books */}
         <div className="flex flex-col gap-6 mb-24">
           {books.map((book) => {
+            const isPack    = book.slug === "pack-livre-carnet";
             const primary   = book.purchaseLinks.find((l) => l.primary) ?? book.purchaseLinks[0];
             const secondary = book.purchaseLinks.find((l) => !l.primary);
             return (
@@ -57,8 +64,7 @@ export default function BoutiquePage() {
                 key={book.slug}
                 slug={book.slug}
                 title={book.title}
-                price={book.price}
-                originalPrice={book.originalPrice}
+                price={isPack ? packDisplayPrice : book.price}
                 linkedTitle={book.detailPage !== false}
                 seriesLabel={book.seriesLabel}
                 companion={book.companion}
@@ -69,7 +75,7 @@ export default function BoutiquePage() {
                   label:       primary.label,
                   sublabel:    primary.sublabel,
                   url:         primary.url,
-                  stripePrice: primary.stripePrice,
+                  stripePrice: isPack ? packStripePrice : primary.stripePrice,
                 }}
                 secondaryLink={
                   secondary

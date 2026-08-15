@@ -121,7 +121,6 @@ export const books: Book[] = [
     series: "coeur-vivant",
     seriesLabel: "Cœur Vivant",
     price: "30 €",
-    originalPrice: "43,40 €",
     isBundle: true,
     summaryShort:
       "Le livre Tu pries, mais tu ne t'apaises pas et le carnet de cheminement Cœur Vivant, réunis pour comprendre puis avancer.",

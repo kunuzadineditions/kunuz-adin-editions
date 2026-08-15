@@ -4,6 +4,7 @@ const ALLOWED_PRICES = new Set([
   process.env.STRIPE_PRICE_LIVRE1,
   process.env.STRIPE_PRICE_CARNET,
   process.env.STRIPE_PRICE_PACK,
+  process.env.STRIPE_PRICE_PACK_39,
 ]);
 
 type LineItem = { priceId: string; quantity: number };

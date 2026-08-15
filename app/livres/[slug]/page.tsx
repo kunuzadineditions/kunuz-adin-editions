@@ -3,11 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { books, getBookBySlug } from "@/lib/books";
+import { getPackDisplayPrice, getPackStripePrice } from "@/lib/pack-price";
 import PdfViewer from "./PdfViewer";
 import FlipBook from "./FlipBook";
 import AddToCartButton from "@/components/shop/AddToCartButton";
 import ShareButton from "@/components/ui/ShareButton";
 import BookGallery from "@/components/ui/BookGallery";
+
+export const revalidate = 60;
 
 export function generateStaticParams() {
   return books.filter((b) => b.detailPage !== false).map((b) => ({ slug: b.slug }));
@@ -62,6 +65,12 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
   const book = getBookBySlug(slug);
 
   if (!book || book.detailPage === false) notFound();
+
+  const isPack       = book.slug === "pack-livre-carnet";
+  const displayPrice = isPack ? getPackDisplayPrice() : book.price;
+  const displayLinks = isPack
+    ? book.purchaseLinks.map((l) => l.stripePrice ? { ...l, stripePrice: getPackStripePrice() } : l)
+    : book.purchaseLinks;
 
   return (
     <div className="min-h-screen py-20 px-4">
@@ -131,13 +140,13 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
 
             {/* Purchase links */}
             <div className="w-full max-w-[320px] flex flex-col gap-3">
-              {book.purchaseLinks.map((link) =>
+              {displayLinks.map((link) =>
                 link.stripePrice ? (
                   <AddToCartButton
                     key={link.sublabel}
                     priceId={link.stripePrice}
                     title={book.title}
-                    price={book.price}
+                    price={displayPrice}
                     coverImage={book.coverImage}
                     coverColor={book.coverColor}
                     className={`flex items-center justify-center gap-2 px-4 py-3 border transition-colors duration-300 w-full text-xs tracking-widest uppercase ${
@@ -210,7 +219,7 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
                     {book.originalPrice}
                   </span>
                 )}
-                <p className="font-display text-3xl text-gold">{book.price}</p>
+                <p className="font-display text-3xl text-gold">{displayPrice}</p>
               </div>
               <ShareButton title={book.title} />
             </div>
