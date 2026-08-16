@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { books, getBookBySlug } from "@/lib/books";
-import { getPackDisplayPrice, getPackStripePrice } from "@/lib/pack-price";
+import { getPackDisplayPrice, getPackStripePrice, isPackLaunchPrice } from "@/lib/pack-price";
 import PdfViewer from "./PdfViewer";
 import FlipBook from "./FlipBook";
 import AddToCartButton from "@/components/shop/AddToCartButton";
@@ -66,8 +66,9 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
 
   if (!book || book.detailPage === false) notFound();
 
-  const isPack       = book.slug === "pack-livre-carnet";
-  const displayPrice = isPack ? getPackDisplayPrice() : book.price;
+  const isPack            = book.slug === "pack-livre-carnet";
+  const displayPrice      = isPack ? getPackDisplayPrice() : book.price;
+  const showLaunchBanner  = isPack && isPackLaunchPrice();
   const displayLinks = isPack
     ? book.purchaseLinks.map((l) => l.stripePrice ? { ...l, stripePrice: getPackStripePrice() } : l)
     : book.purchaseLinks;
@@ -223,6 +224,15 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
               </div>
               <ShareButton title={book.title} />
             </div>
+
+            {showLaunchBanner && (
+              <div className="flex items-start gap-3 mb-8 pl-4 border-l-2 border-gold/50 bg-gold/5 py-3 pr-4">
+                <p className="font-display italic text-sm leading-relaxed text-text-secondary">
+                  <span className="text-gold not-italic">Prix de lancement</span>
+                  {", 30 € jusqu'au 18 septembre inclus. Ensuite, le prix augmente."}
+                </p>
+              </div>
+            )}
 
             <div className="h-px w-16 bg-gold-dark mb-10" />
 

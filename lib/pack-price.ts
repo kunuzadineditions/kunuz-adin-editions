@@ -5,6 +5,10 @@ function isPackNewPrice(): boolean {
   return Math.floor(Date.now() / 1000) >= PACK_SWITCH_TIMESTAMP;
 }
 
+export function isPackLaunchPrice(): boolean {
+  return Math.floor(Date.now() / 1000) < PACK_SWITCH_TIMESTAMP;
+}
+
 export function getPackDisplayPrice(): string {
   return isPackNewPrice() ? "39 €" : "30 €";
 }
