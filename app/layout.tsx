@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter, Amiri } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
+import LaunchBanner from "@/components/layout/LaunchBanner";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/context/CartContext";
@@ -58,6 +59,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-bg text-text antialiased">
         <CartProvider>
           <Header />
+          <LaunchBanner />
           <CartDrawer />
           <main className="flex-1">{children}</main>
           <Footer />

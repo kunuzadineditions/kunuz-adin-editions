@@ -1,5 +1,6 @@
 // 19 sept 2026 00h00 Paris (CEST UTC+2) = 18 sept 2026 22h00 UTC
-const PACK_SWITCH_TIMESTAMP = 1789768800;
+// Exporté pour être réutilisé côté client (LaunchBanner) sans dupliquer la valeur.
+export const PACK_SWITCH_TIMESTAMP = 1789768800;
 
 function isPackNewPrice(): boolean {
   return Math.floor(Date.now() / 1000) >= PACK_SWITCH_TIMESTAMP;

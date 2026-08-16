@@ -25,6 +25,7 @@ interface BookCardProps {
   coverImage?: string;
   primaryLink: PurchaseLinkProps;
   secondaryLink?: PurchaseLinkProps;
+  launchBadge?: string;
 }
 
 export default function BookCard({
@@ -40,6 +41,7 @@ export default function BookCard({
   coverImage,
   primaryLink,
   secondaryLink,
+  launchBadge,
 }: BookCardProps) {
   const [quantity, setQuantity] = useState(1);
 
@@ -47,7 +49,7 @@ export default function BookCard({
   const inc = () => setQuantity((q) => Math.min(10, q + 1));
 
   return (
-    <article className="flex flex-col sm:flex-row gap-8 border border-border p-6 sm:p-8 hover:border-gold-dark transition-colors duration-500">
+    <article className={`flex flex-col sm:flex-row gap-8 border p-6 sm:p-8 hover:border-gold-dark transition-colors duration-500 ${launchBadge ? "border-gold/40" : "border-border"}`}>
       {/* Cover */}
       <div
         className="relative flex-shrink-0 w-full sm:w-32 aspect-[3/4] sm:aspect-auto sm:h-44 overflow-hidden flex flex-col items-center justify-center text-center p-4"
@@ -76,6 +78,11 @@ export default function BookCard({
       {/* Info + CTAs */}
       <div className="flex flex-col justify-between flex-1 min-w-0 gap-6">
         <div>
+          {launchBadge && (
+            <p className="inline-block text-[9px] tracking-[0.3em] text-bg bg-gold uppercase px-2 py-0.5 mb-2">
+              {launchBadge}
+            </p>
+          )}
           {seriesLabel && (
             <p className="text-[10px] tracking-[0.25em] text-gold uppercase mb-1">
               {seriesLabel}

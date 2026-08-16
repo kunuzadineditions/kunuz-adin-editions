@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { books } from "@/lib/books";
-import { getPackDisplayPrice, getPackStripePrice } from "@/lib/pack-price";
+import { getPackDisplayPrice, getPackStripePrice, isPackLaunchPrice } from "@/lib/pack-price";
 import BookCard from "@/components/shop/BookCard";
 import BoutiqueContactForm from "./BoutiqueContactForm";
 import ShareButton from "@/components/ui/ShareButton";
@@ -17,6 +17,12 @@ export const metadata: Metadata = {
 export default async function BoutiquePage() {
   const packDisplayPrice  = getPackDisplayPrice();
   const packStripePrice   = getPackStripePrice();
+  const launchActive      = isPackLaunchPrice();
+
+  // Pendant la phase de lancement : pack en tête de liste.
+  const orderedBooks = launchActive
+    ? [...books].sort((a) => (a.slug === "pack-livre-carnet" ? -1 : 1))
+    : books;
 
   return (
     <div className="min-h-screen py-20 px-4">
@@ -55,7 +61,7 @@ export default async function BoutiquePage() {
 
         {/* Books */}
         <div className="flex flex-col gap-6 mb-24">
-          {books.map((book) => {
+          {orderedBooks.map((book) => {
             const isPack    = book.slug === "pack-livre-carnet";
             const primary   = book.purchaseLinks.find((l) => l.primary) ?? book.purchaseLinks[0];
             const secondary = book.purchaseLinks.find((l) => !l.primary);
@@ -82,6 +88,7 @@ export default async function BoutiquePage() {
                     ? { label: secondary.label, sublabel: secondary.sublabel, url: secondary.url }
                     : undefined
                 }
+                launchBadge={isPack && launchActive ? "Offre de lancement" : undefined}
               />
             );
           })}
