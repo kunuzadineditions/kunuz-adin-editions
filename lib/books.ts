@@ -117,7 +117,7 @@ export const books: Book[] = [
   },
   {
     slug: "pack-livre-carnet",
-    title: "Pack : Livre + Carnet",
+    title: "Pack Fondateur",
     series: "coeur-vivant",
     seriesLabel: "Cœur Vivant",
     price: "30 €",

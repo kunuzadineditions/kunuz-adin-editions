@@ -226,10 +226,19 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
             </div>
 
             {showLaunchBanner && (
-              <div className="flex items-start gap-3 mb-8 pl-4 border-l-2 border-gold/50 bg-gold/5 py-3 pr-4">
-                <p className="font-display italic text-sm leading-relaxed text-text-secondary">
-                  <span className="text-gold not-italic">Prix de lancement</span>
-                  {", 30 € jusqu'au 18 septembre inclus. Ensuite, le prix augmente."}
+              <div className="mb-8 border border-gold/50 bg-gold/10 px-6 py-5">
+                <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-3">
+                  Offre de lancement
+                </p>
+                <p className="font-display text-base sm:text-lg text-text leading-relaxed">
+                  {"Pack Fondateur à "}
+                  <span className="text-gold">30 €</span>
+                  {" jusqu'au 18 septembre inclus. À partir du 19 septembre, il passe à "}
+                  <span className="text-text-secondary">39 €</span>
+                  {"."}
+                </p>
+                <p className="font-display italic text-base sm:text-lg text-gold mt-2">
+                  Profitez du meilleur prix maintenant.
                 </p>
               </div>
             )}
