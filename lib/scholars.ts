@@ -72,6 +72,7 @@ export const scholars: Scholar[] = [
     slug: "ibn-al-qayyim",
     name: "Ibn al-Qayyim al-Jawziyya",
     nameArabic: "الإمام ابن القيم الجوزية",
+    title: "Al-Imâm",
     image: "/images/scholars/ibn-al-qayyim.jpg",
     fullName:
       "Abû ʿAbdillâh Shams ad-Dîn Muhammad ibn Abî Bakr ibn Ayyûb az-Zarʿî ad-Dimashqî al-Hanbalî",
