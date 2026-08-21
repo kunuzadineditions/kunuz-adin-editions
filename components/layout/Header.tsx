@@ -12,6 +12,7 @@ const navLinks = [
   { href: "/boutique", label: "Boutique" },
   { href: "/livre-audio", label: "Livre Audio" },
   { href: "/auteur", label: "Auteur" },
+  { href: "/aux-sources", label: "Aux sources" },
   { href: "/livre-d-or", label: "Livre d'or" },
 ];
 

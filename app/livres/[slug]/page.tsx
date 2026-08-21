@@ -368,6 +368,24 @@ export default async function BookPage(props: PageProps<"/livres/[slug]">) {
               </Link>
             </div>
 
+            {/* Aux sources — uniquement sur la fiche "Tu pries" */}
+            {book.slug === "tu-pries-mais-tu-ne-tapaises-pas" && (
+              <div className="mt-12 pt-10 border-t border-border">
+                <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-2">
+                  Aux sources
+                </p>
+                <p className="text-text-secondary/60 text-sm leading-relaxed">
+                  {"Ce livre puise aux sources d'Ibn al-Qayyim et Ibn Taymiyya. "}
+                  <Link
+                    href="/aux-sources"
+                    className="text-gold hover:text-gold-light transition-colors duration-300 underline underline-offset-4 decoration-gold/30"
+                  >
+                    Découvrir leur enseignement
+                  </Link>
+                </p>
+              </div>
+            )}
+
             {/* Invitation Livre d'or */}
             <div className="mt-12 pt-10 border-t border-border">
               <p className="text-text-secondary/60 text-sm leading-relaxed">
