@@ -41,10 +41,10 @@ export default function AuxSourcesPage() {
           </h1>
           <div className="space-y-4 text-text-secondary leading-relaxed max-w-2xl">
             <p>
-              KUNUZ ADIN Éditions s'inscrit dans la tradition des sciences du cœur, telles
-              qu'elles ont été préservées et transmises par les savants du Salaf. De maître à
-              élève, de génération en génération, un même corpus de connaissance voyage
-              jusqu'à nous.
+              KUNUZ ADIN Éditions s'inscrit dans la tradition des sciences du cœur, telle
+              qu'elle a été comprise et transmise selon la voie des pieux prédécesseurs
+              (as-Salaf as-Sâlih). De maître à élève, de génération en génération, un même
+              corpus de connaissance voyage jusqu'à nous.
             </p>
             <p>
               Cette page présente les savants dont le travail inspire directement nos
