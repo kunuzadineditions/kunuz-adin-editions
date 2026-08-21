@@ -125,7 +125,21 @@ export default function AuxSourcesPage() {
                     className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <p
+                    className="absolute bottom-4 left-0 right-0 text-center pointer-events-none px-4"
+                    dir="rtl"
+                    lang="ar"
+                    style={{
+                      fontFamily: "var(--font-amiri)",
+                      fontSize: "1.15rem",
+                      color: "#C9A84C",
+                      textShadow: "0 2px 10px rgba(0,0,0,0.95)",
+                      letterSpacing: "0.02em",
+                    }}
+                  >
+                    {scholar.nameArabic}
+                  </p>
                 </div>
               )}
 

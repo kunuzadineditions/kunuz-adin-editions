@@ -47,6 +47,20 @@ export default async function ScholarPage({
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-bg/20 to-bg" />
+          <p
+            className="absolute bottom-6 sm:bottom-10 left-0 right-0 text-center pointer-events-none px-4"
+            dir="rtl"
+            lang="ar"
+            style={{
+              fontFamily: "var(--font-amiri)",
+              fontSize: "clamp(1.25rem, 3vw, 2rem)",
+              color: "#C9A84C",
+              textShadow: "0 2px 16px rgba(0,0,0,0.95)",
+              letterSpacing: "0.02em",
+            }}
+          >
+            {scholar.nameArabic}
+          </p>
         </div>
       )}
 

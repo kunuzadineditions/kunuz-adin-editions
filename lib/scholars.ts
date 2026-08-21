@@ -32,7 +32,7 @@ export const scholars: Scholar[] = [
   {
     slug: "ibn-taymiyya",
     name: "Ibn Taymiyya",
-    nameArabic: "رحمه الله",
+    nameArabic: "شيخ الإسلام ابن تيمية",
     title: "Shaykh al-Islâm",
     image: "/images/scholars/ibn-taymiyya.jpg",
     fullName:
@@ -71,7 +71,7 @@ export const scholars: Scholar[] = [
   {
     slug: "ibn-al-qayyim",
     name: "Ibn al-Qayyim al-Jawziyya",
-    nameArabic: "رحمه الله",
+    nameArabic: "الإمام ابن القيم الجوزية",
     image: "/images/scholars/ibn-al-qayyim.jpg",
     fullName:
       "Abû ʿAbdillâh Shams ad-Dîn Muhammad ibn Abî Bakr ibn Ayyûb az-Zarʿî ad-Dimashqî al-Hanbalî",
