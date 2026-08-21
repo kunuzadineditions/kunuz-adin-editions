@@ -11,6 +11,7 @@ export type Scholar = {
   title?: string;
   fullName: string;
   nameExplained?: string;
+  image?: string;
   dates: string;
   birth: string;
   death: string;
@@ -33,6 +34,7 @@ export const scholars: Scholar[] = [
     name: "Ibn Taymiyya",
     nameArabic: "رحمه الله",
     title: "Shaykh al-Islâm",
+    image: "/images/scholars/ibn-taymiyya.jpg",
     fullName:
       "Taqî ad-Dîn Ahmad ibn ʿAbd al-Halîm ibn ʿAbd as-Salâm ibn Taymiyya al-Harrânî",
     dates: "661–728 H / 1263–1328",
@@ -70,6 +72,7 @@ export const scholars: Scholar[] = [
     slug: "ibn-al-qayyim",
     name: "Ibn al-Qayyim al-Jawziyya",
     nameArabic: "رحمه الله",
+    image: "/images/scholars/ibn-al-qayyim.jpg",
     fullName:
       "Abû ʿAbdillâh Shams ad-Dîn Muhammad ibn Abî Bakr ibn Ayyûb az-Zarʿî ad-Dimashqî al-Hanbalî",
     nameExplained:

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { scholars, buildChain } from "@/lib/scholars";
 
 export const metadata: Metadata = {
@@ -112,8 +113,23 @@ export default function AuxSourcesPage() {
             <Link
               key={scholar.slug}
               href={`/aux-sources/${scholar.slug}`}
-              className="group border border-border hover:border-gold/30 bg-card p-6 sm:p-8 transition-colors duration-500 flex flex-col gap-5"
+              className="group border border-border hover:border-gold/30 bg-card transition-colors duration-500 flex flex-col"
             >
+              {/* Image */}
+              {scholar.image && (
+                <div className="relative w-full aspect-[16/9] overflow-hidden">
+                  <Image
+                    src={scholar.image}
+                    alt=""
+                    fill
+                    className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+                </div>
+              )}
+
+              <div className={`flex flex-col gap-5 p-6 sm:p-8 ${scholar.image ? "flex-1" : ""}`}>
               <div>
                 {scholar.title && (
                   <p className="text-[9px] tracking-[0.3em] text-gold uppercase mb-2">
@@ -164,6 +180,7 @@ export default function AuxSourcesPage() {
                 Lire la fiche complète
                 <ArrowIcon />
               </p>
+              </div>
             </Link>
           ))}
         </div>

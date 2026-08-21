@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { scholars, getScholarBySlug } from "@/lib/scholars";
 
@@ -33,8 +34,23 @@ export default async function ScholarPage({
   const teacher = scholar.teacherSlug ? getScholarBySlug(scholar.teacherSlug) : null;
 
   return (
-    <div className="min-h-screen py-20 px-4">
-      <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen">
+      {/* Image d'en-tête */}
+      {scholar.image && (
+        <div className="relative w-full aspect-[21/9] sm:aspect-[21/7] overflow-hidden">
+          <Image
+            src={scholar.image}
+            alt=""
+            fill
+            className="object-cover opacity-70"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-bg/20 to-bg" />
+        </div>
+      )}
+
+      <div className={`max-w-3xl mx-auto px-4 ${scholar.image ? "pt-8 pb-20" : "py-20"}`}>
 
         {/* Fil d'Ariane */}
         <nav
@@ -266,4 +282,5 @@ export default async function ScholarPage({
       </div>
     </div>
   );
+
 }
