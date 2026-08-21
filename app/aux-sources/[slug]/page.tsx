@@ -92,17 +92,6 @@ export default async function ScholarPage({
           <h1 className="font-display text-4xl sm:text-5xl text-text font-light leading-tight mb-3">
             {scholar.name}
           </h1>
-          <p
-            dir="rtl"
-            lang="ar"
-            style={{
-              fontFamily: "var(--font-amiri)",
-              fontSize: 22,
-              color: "rgba(201,168,76,0.65)",
-            }}
-          >
-            {scholar.nameArabic}
-          </p>
           {scholar.nameExplained && (
             <p className="text-text-secondary/50 text-sm italic mt-2">
               {scholar.nameExplained}

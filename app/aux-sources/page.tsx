@@ -153,18 +153,6 @@ export default function AuxSourcesPage() {
                 <h2 className="font-display text-2xl text-text group-hover:text-gold transition-colors duration-300 leading-snug">
                   {scholar.name}
                 </h2>
-                <p
-                  className="mt-1"
-                  dir="rtl"
-                  lang="ar"
-                  style={{
-                    fontFamily: "var(--font-amiri)",
-                    fontSize: 16,
-                    color: "rgba(201,168,76,0.45)",
-                  }}
-                >
-                  {scholar.nameArabic}
-                </p>
                 <p className="text-[10px] text-text-secondary/50 mt-1 tracking-wider">
                   {scholar.dates}
                 </p>
