@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { scholars, getScholarBySlug } from "@/lib/scholars";
 import ScholarTimeline from "@/components/scholars/ScholarTimeline";
+import ScholarMap from "@/components/scholars/ScholarMap";
 
 export function generateStaticParams() {
   return scholars.map((s) => ({ slug: s.slug }));
@@ -165,6 +166,9 @@ export default async function ScholarPage({
 
         {/* Frise chronologique */}
         {scholar.timeline && <ScholarTimeline timeline={scholar.timeline} />}
+
+        {/* Lieu */}
+        {scholar.place && <ScholarMap place={scholar.place} />}
 
         {/* Connu pour */}
         <section className="mb-12">
