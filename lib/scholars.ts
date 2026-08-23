@@ -51,7 +51,12 @@ export const scholars: Scholar[] = [
     bio: [
       "Sa famille quitte Harrân face à l'avancée mongole et s'installe à Damas, où son père était responsable d'une madrasa. Il y reçoit une éducation solide, mémorise le Coran très jeune, et se distingue par une maîtrise exceptionnelle des sciences islamiques. Il atteint le rang de savant apte à enseigner et à donner des fatwas avant l'âge de vingt ans. Il enseigne notamment l'exégèse coranique à la mosquée des Omeyyades de Damas.",
     ],
-    timeline: [],
+    timeline: [
+      { year: "661 H / 1263", text: "Naissance à Harrân, dans une famille de savants hanbalites." },
+      { year: "Vers 667 H / 1269", text: "Dans son enfance, la famille quitte Harrân face à l'avancée mongole et s'installe à Damas, où son père dirige une madrasa." },
+      { year: "Avant 20 ans", text: "Il atteint le rang de savant, apte à enseigner et à rendre des fatwas. Il enseigne l'exégèse coranique à la mosquée des Omeyyades." },
+      { year: "728 H / 1328", text: "Il s'éteint dans la citadelle de Damas, où il était emprisonné pour ses positions." },
+    ],
     knownFor: [
       "Son attachement rigoureux au Coran et à la Sunna",
       "Son combat contre les innovations (bidʿa) et les déviations doctrinales",
