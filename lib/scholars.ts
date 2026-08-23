@@ -4,6 +4,11 @@ export type Quote = {
   source: string;
 };
 
+export type TimelineEntry = {
+  year: string;
+  text: string;
+};
+
 export type Scholar = {
   slug: string;
   name: string;
@@ -18,6 +23,7 @@ export type Scholar = {
   school: string;
   way: string;
   bio: string[];
+  timeline?: TimelineEntry[];
   knownFor: string[];
   students?: string[];
   majorWorks?: string[];
@@ -45,6 +51,7 @@ export const scholars: Scholar[] = [
     bio: [
       "Sa famille quitte Harrân face à l'avancée mongole et s'installe à Damas, où son père était responsable d'une madrasa. Il y reçoit une éducation solide, mémorise le Coran très jeune, et se distingue par une maîtrise exceptionnelle des sciences islamiques. Il atteint le rang de savant apte à enseigner et à donner des fatwas avant l'âge de vingt ans. Il enseigne notamment l'exégèse coranique à la mosquée des Omeyyades de Damas.",
     ],
+    timeline: [],
     knownFor: [
       "Son attachement rigoureux au Coran et à la Sunna",
       "Son combat contre les innovations (bidʿa) et les déviations doctrinales",
@@ -88,6 +95,7 @@ export const scholars: Scholar[] = [
     bio: [
       "Issu d'une famille de savoir, son père était le responsable (qayyim) de l'école al-Jawziyya à Damas, d'où son surnom. Il apprend dès son jeune âge le Coran, le hadith, la langue arabe et le fiqh. Sa rencontre avec Ibn Taymiyya vers 712 H marque un tournant décisif : il reste à ses côtés environ seize ans, jusqu'à la mort de son maître en 728 H, et devient son élève le plus renommé.",
     ],
+    timeline: [],
     knownFor: [
       "Sa science du cœur (ʿilm al-qalb) et des maladies spirituelles",
       "Ses ouvrages de tazkiyat an-nafs et de guidance du croyant",

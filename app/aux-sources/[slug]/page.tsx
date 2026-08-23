@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { scholars, getScholarBySlug } from "@/lib/scholars";
+import ScholarTimeline from "@/components/scholars/ScholarTimeline";
 
 export function generateStaticParams() {
   return scholars.map((s) => ({ slug: s.slug }));
@@ -161,6 +162,9 @@ export default async function ScholarPage({
             ))}
           </div>
         </section>
+
+        {/* Frise chronologique */}
+        {scholar.timeline && <ScholarTimeline timeline={scholar.timeline} />}
 
         {/* Connu pour */}
         <section className="mb-12">
