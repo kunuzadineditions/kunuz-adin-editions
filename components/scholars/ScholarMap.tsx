@@ -126,7 +126,7 @@ function DamascusMap() {
       <text
         x="230"
         y="22"
-        fill="rgba(201,168,76,0.2)"
+        fill="rgba(201,168,76,0.65)"
         fontSize="7.5"
         fontFamily="Georgia, serif"
         textAnchor="middle"
@@ -137,8 +137,8 @@ function DamascusMap() {
       <text
         x="215"
         y="130"
-        fill="rgba(201,168,76,0.18)"
-        fontSize="8"
+        fill="#C9A84C"
+        fontSize="9"
         fontFamily="Georgia, serif"
         textAnchor="middle"
         letterSpacing="2.5"
@@ -148,7 +148,7 @@ function DamascusMap() {
       <text
         x="375"
         y="160"
-        fill="rgba(201,168,76,0.17)"
+        fill="rgba(201,168,76,0.65)"
         fontSize="7.5"
         fontFamily="Georgia, serif"
         textAnchor="middle"
@@ -159,7 +159,7 @@ function DamascusMap() {
       <text
         x="120"
         y="270"
-        fill="rgba(201,168,76,0.17)"
+        fill="rgba(201,168,76,0.65)"
         fontSize="7.5"
         fontFamily="Georgia, serif"
         textAnchor="middle"
@@ -172,8 +172,8 @@ function DamascusMap() {
       <text
         x="56"
         y="185"
-        fill="rgba(201,168,76,0.28)"
-        fontSize="5.5"
+        fill="rgba(201,168,76,0.65)"
+        fontSize="6.5"
         fontFamily="Georgia, serif"
         textAnchor="middle"
         transform="rotate(-72, 56, 185)"
@@ -185,7 +185,7 @@ function DamascusMap() {
       <text
         x="22"
         y="140"
-        fill="rgba(201,168,76,0.17)"
+        fill="rgba(201,168,76,0.45)"
         fontSize="6.5"
         fontFamily="Georgia, serif"
         fontStyle="italic"

@@ -55,9 +55,9 @@ export const scholars: Scholar[] = [
     birth: "661 H (1263) à Harrân (aujourd'hui au sud-est de la Turquie)",
     death: "728 H (1328) à Damas, dans la citadelle, emprisonné pour ses positions",
     school: "Hanbalite",
-    way: "Salaf, attachement au Coran, à la Sunna et à la voie des pieux prédécesseurs (as-Salaf as-Sâlih)",
+    way: "Salaf, attachement au Qur'an, à la Sunna et à la voie des pieux prédécesseurs (as-Salaf as-Sâlih)",
     bio: [
-      "Sa famille quitte Harrân face à l'avancée mongole et s'installe à Damas, où son père était responsable d'une madrasa. Il y reçoit une éducation solide, mémorise le Coran très jeune, et se distingue par une maîtrise exceptionnelle des sciences islamiques. Il atteint le rang de savant apte à enseigner et à donner des fatwas avant l'âge de vingt ans. Il enseigne notamment l'exégèse coranique à la mosquée des Omeyyades de Damas.",
+      "Sa famille quitte Harrân face à l'avancée mongole et s'installe à Damas, où son père était responsable d'une madrasa. Il y reçoit une éducation solide, mémorise le Qur'an très jeune, et se distingue par une maîtrise exceptionnelle des sciences islamiques. Il atteint le rang de savant apte à enseigner et à donner des fatwas avant l'âge de vingt ans. Il enseigne notamment l'exégèse coranique à la mosquée des Omeyyades de Damas.",
     ],
     timeline: [
       { year: "661 H / 1263", text: "Naissance à Harrân, dans une famille de savants hanbalites." },
@@ -67,7 +67,7 @@ export const scholars: Scholar[] = [
     ],
     place: { city: "Damas", region: "Syrie", mapKey: "damascus", locationText: "C'est à Damas qu'il grandit, qu'il enseigne, et à Damas qu'il s'éteint. Une vie entière tient entre ces murs." },
     knownFor: [
-      "Son attachement rigoureux au Coran et à la Sunna",
+      "Son attachement rigoureux au Qur'an et à la Sunna",
       "Son combat contre les innovations (bidʿa) et les déviations doctrinales",
       "Ses nombreuses fatwas et ouvrages couvrant le tawhîd, le fiqh, l'ʿaqîda, le tasawwuf sunnite",
       "Ses emprisonnements à plusieurs reprises à cause de ses positions, jusqu'à sa mort en détention dans la citadelle de Damas",
@@ -107,7 +107,7 @@ export const scholars: Scholar[] = [
     school: "Hanbalite",
     way: "Salaf, disciple majeur de Shaykh al-Islâm Ibn Taymiyya",
     bio: [
-      "Issu d'une famille de savoir, son père était le responsable (qayyim) de l'école al-Jawziyya à Damas, d'où son surnom. Il apprend dès son jeune âge le Coran, le hadith, la langue arabe et le fiqh. Sa rencontre avec Ibn Taymiyya vers 712 H marque un tournant décisif : il reste à ses côtés environ seize ans, jusqu'à la mort de son maître en 728 H, et devient son élève le plus renommé.",
+      "Issu d'une famille de savoir, son père était le responsable (qayyim) de l'école al-Jawziyya à Damas, d'où son surnom. Il apprend dès son jeune âge le Qur'an, le hadith, la langue arabe et le fiqh. Sa rencontre avec Ibn Taymiyya vers 712 H marque un tournant décisif : il reste à ses côtés environ seize ans, jusqu'à la mort de son maître en 728 H, et devient son élève le plus renommé.",
     ],
     timeline: [
       { year: "691 H / 1292", text: "Naissance au village de Zarʿ, près de Damas. Son père dirige la madrasa al-Jawziyya, dont il héritera le nom." },
@@ -148,9 +148,9 @@ export const scholars: Scholar[] = [
         source: "Ibn al-Qayyim, Ighâthat al-Lahfân.",
       },
       {
-        label: "Sur le Coran comme guérison des cœurs",
-        text: "Le Coran est une guérison de ce qui est dans les poitrines (c'est-à-dire les cœurs) ; il en fait sortir ce que le diable y jette comme doutes, désirs et mauvaises intentions.",
-        source: "Ibn al-Qayyim, dans ses écrits sur le cœur et le Coran.",
+        label: "Sur le Qur'an comme guérison des cœurs",
+        text: "Le Qur'an est une guérison de ce qui est dans les poitrines (c'est-à-dire les cœurs) ; il en fait sortir ce que le diable y jette comme doutes, désirs et mauvaises intentions.",
+        source: "Ibn al-Qayyim, dans ses écrits sur le cœur et le Qur'an.",
       },
     ],
     teacherSlug: "ibn-taymiyya",
