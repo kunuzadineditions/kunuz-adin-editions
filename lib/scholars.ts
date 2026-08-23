@@ -100,7 +100,12 @@ export const scholars: Scholar[] = [
     bio: [
       "Issu d'une famille de savoir, son père était le responsable (qayyim) de l'école al-Jawziyya à Damas, d'où son surnom. Il apprend dès son jeune âge le Coran, le hadith, la langue arabe et le fiqh. Sa rencontre avec Ibn Taymiyya vers 712 H marque un tournant décisif : il reste à ses côtés environ seize ans, jusqu'à la mort de son maître en 728 H, et devient son élève le plus renommé.",
     ],
-    timeline: [],
+    timeline: [
+      { year: "691 H / 1292", text: "Naissance au village de Zarʿ, près de Damas. Son père dirige la madrasa al-Jawziyya, dont il héritera le nom." },
+      { year: "Vers 712 H", text: "Sa rencontre avec Ibn Taymiyya marque un tournant décisif. Il demeure à ses côtés environ seize années." },
+      { year: "728 H / 1328", text: "Mort de son maître Ibn Taymiyya, après seize ans de compagnonnage." },
+      { year: "751 H / 1350", text: "Il s'éteint à Damas, enterré auprès de son père au cimetière de Bâb as-Saghîr." },
+    ],
     knownFor: [
       "Sa science du cœur (ʿilm al-qalb) et des maladies spirituelles",
       "Ses ouvrages de tazkiyat an-nafs et de guidance du croyant",
