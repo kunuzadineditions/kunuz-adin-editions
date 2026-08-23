@@ -65,7 +65,7 @@ export const scholars: Scholar[] = [
       { year: "Avant 20 ans", text: "Il atteint le rang de savant, apte à enseigner et à rendre des fatwas. Il enseigne l'exégèse coranique à la mosquée des Omeyyades." },
       { year: "728 H / 1328", text: "Il s'éteint dans la citadelle de Damas, où il était emprisonné pour ses positions." },
     ],
-    place: { city: "Damas", region: "Syrie", mapKey: "damascus" },
+    place: { city: "Damas", region: "Syrie", mapKey: "damascus", locationText: "C'est à Damas qu'il grandit, qu'il enseigne, et à Damas qu'il s'éteint. Une vie entière tient entre ces murs." },
     knownFor: [
       "Son attachement rigoureux au Coran et à la Sunna",
       "Son combat contre les innovations (bidʿa) et les déviations doctrinales",
@@ -115,7 +115,7 @@ export const scholars: Scholar[] = [
       { year: "728 H / 1328", text: "Mort de son maître Ibn Taymiyya, après seize ans de compagnonnage." },
       { year: "751 H / 1350", text: "Il s'éteint à Damas, enterré auprès de son père au cimetière de Bâb as-Saghîr." },
     ],
-    place: { city: "Damas", region: "Syrie", mapKey: "damascus" },
+    place: { city: "Damas", region: "Syrie", mapKey: "damascus", locationText: "Né près de Damas, il y étudie, y enseigne et y repose. La ville du Shâm fut le cœur de son cheminement." },
     knownFor: [
       "Sa science du cœur (ʿilm al-qalb) et des maladies spirituelles",
       "Ses ouvrages de tazkiyat an-nafs et de guidance du croyant",
