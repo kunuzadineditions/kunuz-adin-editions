@@ -189,6 +189,18 @@ export const scholars: Scholar[] = [
       "Mîzân al-Iʿtidâl",
       "Tadhkirat al-Huffâz",
     ],
+    featuredQuote: {
+      label: "Sur le savoir bénéfique",
+      text: "Nous demandons à Allah un savoir bénéfique. Sais-tu ce qu'est le savoir bénéfique ? C'est ce que le Qur'an a apporté et que le Messager ﷺ a expliqué par ses paroles et ses actes, sans qu'une interdiction ne soit venue à son sujet. Le Prophète ﷺ a dit : Quiconque se détourne de ma Sunna ne fait pas partie des miens. Ainsi, mon frère, attache-toi à méditer le Livre d'Allah, à lire assidûment les deux Sahîh, les Sunan d'an-Nasâʾî, les Riyâd d'an-Nawawî et ses Adhkâr : tu connaîtras alors la réussite et le succès.",
+      source: "Adh-Dhahabî, Siyar Aʿlâm an-Nubalâʾ, t. 19, dans la notice d'Abû Hâmid al-Ghazâlî",
+    },
+    quotes: [
+      {
+        label: "Sur le savoir bénéfique",
+        text: "Nous demandons à Allah un savoir bénéfique. Sais-tu ce qu'est le savoir bénéfique ? C'est ce que le Qur'an a apporté et que le Messager ﷺ a expliqué par ses paroles et ses actes, sans qu'une interdiction ne soit venue à son sujet. Le Prophète ﷺ a dit : Quiconque se détourne de ma Sunna ne fait pas partie des miens. Ainsi, mon frère, attache-toi à méditer le Livre d'Allah, à lire assidûment les deux Sahîh, les Sunan d'an-Nasâʾî, les Riyâd d'an-Nawawî et ses Adhkâr : tu connaîtras alors la réussite et le succès.",
+        source: "Adh-Dhahabî, Siyar Aʿlâm an-Nubalâʾ, t. 19, dans la notice d'Abû Hâmid al-Ghazâlî",
+      },
+    ],
     teacherSlug: "ibn-taymiyya",
   },
 ];
