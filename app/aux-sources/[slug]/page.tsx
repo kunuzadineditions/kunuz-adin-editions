@@ -6,6 +6,26 @@ import { scholars, getScholarBySlug } from "@/lib/scholars";
 import ScholarTimeline from "@/components/scholars/ScholarTimeline";
 import ScholarMap from "@/components/scholars/ScholarMap";
 
+import type { ReactNode } from "react";
+
+/** Wrap ﷺ (U+FDFA) so its fallback font doesn't inflate line height. */
+function withSaw(text: string): ReactNode {
+  const parts = text.split("ﷺ");
+  if (parts.length === 1) return text;
+  const nodes: ReactNode[] = [];
+  parts.forEach((part, i) => {
+    if (i > 0) {
+      nodes.push(
+        <span key={i} style={{ lineHeight: 1, verticalAlign: "middle" }}>
+          ﷺ
+        </span>
+      );
+    }
+    if (part) nodes.push(part);
+  });
+  return <>{nodes}</>;
+}
+
 export function generateStaticParams() {
   return scholars.map((s) => ({ slug: s.slug }));
 }
@@ -275,7 +295,7 @@ export default async function ScholarPage({
                     </p>
                   )}
                   <blockquote className="font-display italic text-lg text-text leading-relaxed mb-3">
-                    &ldquo;{quote.text}&rdquo;
+                    &ldquo;{withSaw(quote.text)}&rdquo;
                   </blockquote>
                   <p className="text-xs text-text-secondary/50 leading-relaxed">{quote.source}</p>
                 </div>

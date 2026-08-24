@@ -4,6 +4,23 @@ import Image from "next/image";
 import { scholars } from "@/lib/scholars";
 import DamascusCircle from "@/components/scholars/DamascusCircle";
 
+import type { ReactNode } from "react";
+
+function withSaw(text: string): ReactNode {
+  const parts = text.split("ﷺ");
+  if (parts.length === 1) return text;
+  const nodes: ReactNode[] = [];
+  parts.forEach((part, i) => {
+    if (i > 0) {
+      nodes.push(
+        <span key={i} style={{ lineHeight: 1, verticalAlign: "middle" }}>ﷺ</span>
+      );
+    }
+    if (part) nodes.push(part);
+  });
+  return <>{nodes}</>;
+}
+
 export const metadata: Metadata = {
   title: "Aux sources de la chaîne du savoir",
   description:
@@ -127,7 +144,7 @@ export default function AuxSourcesPage() {
                   >
                     &ldquo;
                   </span>
-                  {scholar.featuredQuote.text}
+                  {withSaw(scholar.featuredQuote.text)}
                   <span
                     className="text-gold/25 not-italic"
                     style={{ fontSize: 36, lineHeight: 1 }}
