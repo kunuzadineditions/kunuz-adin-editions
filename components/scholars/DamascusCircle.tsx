@@ -11,14 +11,14 @@ function Medallion({ scholar, isRoot }: { scholar: Scholar; isRoot: boolean }) {
   const outer = isRoot ? 132 : 116;
   const inner = isRoot ? 116 : 100;
   const fontSize = isRoot ? 13 : 12;
-  const ringSize = outer + 26; // 26px larger than outer on each axis
-  const ringOffset = -13;      // (ringSize - outer) / 2
+  const ringSize = outer + 26;
+  const ringOffset = -13;
 
   return (
-    <div className="flex flex-col items-center medallion-zoom">
+    <div className="flex flex-col items-center">
       {/* Circle */}
       <div
-        className="relative flex items-center justify-center rounded-full border border-gold/50 bg-bg hover:border-gold transition-colors duration-300"
+        className="relative flex items-center justify-center rounded-full border border-gold/50 bg-bg"
         style={{ width: outer, height: outer }}
       >
         {/* Rotating ring — root only */}
@@ -39,7 +39,6 @@ function Medallion({ scholar, isRoot }: { scholar: Scholar; isRoot: boolean }) {
               xmlns="http://www.w3.org/2000/svg"
               style={{ width: "100%", height: "100%" }}
             >
-              {/* The ring */}
               <circle
                 cx={ringSize / 2}
                 cy={ringSize / 2}
@@ -47,13 +46,7 @@ function Medallion({ scholar, isRoot }: { scholar: Scholar; isRoot: boolean }) {
                 stroke="rgba(201,168,76,0.38)"
                 strokeWidth="0.9"
               />
-              {/* Ornament dot at 12 o'clock */}
-              <circle
-                cx={ringSize / 2}
-                cy="2"
-                r="2.2"
-                fill="rgba(201,168,76,0.65)"
-              />
+              <circle cx={ringSize / 2} cy="2" r="2.2" fill="rgba(201,168,76,0.65)" />
             </svg>
           </div>
         )}
@@ -83,7 +76,6 @@ function Medallion({ scholar, isRoot }: { scholar: Scholar; isRoot: boolean }) {
             {scholar.title}
           </p>
         )}
-        {/* Show full name below the circle only if it was shortened */}
         {circleName(scholar.name) !== scholar.name && (
           <p className="text-[9px] text-gold/60 mt-0.5 font-display italic leading-tight">
             {scholar.name}
@@ -116,14 +108,13 @@ export default function DamascusCircle({ scholars }: { scholars: Scholar[] }) {
 
           return (
             <div key={root.slug} className="flex flex-col items-center w-full">
-              {/* Root */}
-              <Link href={`/aux-sources/${root.slug}`}>
+              {/* Root — medallion-zoom on the <a> for correct z-index */}
+              <Link href={`/aux-sources/${root.slug}`} className="medallion-zoom">
                 <Medallion scholar={root} isRoot />
               </Link>
 
               {students.length > 0 && (
                 <>
-                  {/* Stem down from root */}
                   <div className="w-px h-8 bg-gold/25" />
 
                   {/* Mobile: vertical rail */}
@@ -133,7 +124,10 @@ export default function DamascusCircle({ scholars }: { scholars: Scholar[] }) {
                       {students.map((student) => (
                         <div key={student.slug} className="relative">
                           <div className="absolute -left-12 top-14 w-12 h-px bg-gold/20" />
-                          <Link href={`/aux-sources/${student.slug}`}>
+                          <Link
+                            href={`/aux-sources/${student.slug}`}
+                            className="medallion-zoom"
+                          >
                             <Medallion scholar={student} isRoot={false} />
                           </Link>
                         </div>
@@ -141,9 +135,8 @@ export default function DamascusCircle({ scholars }: { scholars: Scholar[] }) {
                     </div>
                   </div>
 
-                  {/* Desktop: horizontal tree, wraps naturally */}
+                  {/* Desktop: horizontal tree */}
                   <div className="hidden sm:flex flex-wrap justify-center gap-x-10 gap-y-12 relative w-full max-w-3xl mx-auto">
-                    {/* Horizontal connector — top of children area */}
                     {students.length > 1 && (
                       <div
                         className="absolute top-0 h-px bg-gold/25"
@@ -160,7 +153,10 @@ export default function DamascusCircle({ scholars }: { scholars: Scholar[] }) {
                         style={{ minWidth: 140 }}
                       >
                         <div className="w-px h-8 bg-gold/25" />
-                        <Link href={`/aux-sources/${student.slug}`}>
+                        <Link
+                          href={`/aux-sources/${student.slug}`}
+                          className="medallion-zoom"
+                        >
                           <Medallion scholar={student} isRoot={false} />
                         </Link>
                       </div>

@@ -68,10 +68,14 @@ body {
 
 /* ── Cercle de Damas ── */
 .medallion-zoom {
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  z-index: 1;
+  display: block;
+  transition: transform 0.28s ease-in-out;
 }
 .medallion-zoom:hover {
-  transform: scale(1.08);
+  transform: scale(1.8);
+  z-index: 10;
 }
 
 @keyframes orbit-spin {
