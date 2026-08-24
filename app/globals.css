@@ -65,3 +65,26 @@ body {
 .livre-cover-open   { animation: livreBookCoverOpen 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 .livre-page-in-next { animation: livrePageInNext   0.45s cubic-bezier(0.2, 0, 0.3, 1) both; }
 .livre-page-in-prev { animation: livrePageInPrev   0.45s cubic-bezier(0.2, 0, 0.3, 1) both; }
+
+/* ── Cercle de Damas ── */
+.medallion-zoom {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.medallion-zoom:hover {
+  transform: scale(1.08);
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.ring-orbit {
+  animation: orbit-spin 28s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .medallion-zoom            { transition: none; }
+  .medallion-zoom:hover      { transform: none; }
+  .ring-orbit                { animation: none; }
+}
