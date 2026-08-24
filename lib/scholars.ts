@@ -161,6 +161,7 @@ export const scholars: Scholar[] = [
     name: "Adh-Dhahabî",
     nameArabic: "شمس الدين الذهبي",
     title: "Al-Imâm",
+    image: "/images/scholars/adh-dhahabi.jpg",
     fullName:
       "Shams ad-Dîn Abû ʿAbdillâh Muhammad ibn Ahmad ibn ʿUthmân ibn Qâymâz adh-Dhahabî",
     dates: "672–748 H / 1274–1348",
