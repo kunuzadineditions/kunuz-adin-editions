@@ -36,8 +36,8 @@ export type Scholar = {
   students?: string[];
   majorWorks?: string[];
   editorialNote?: string;
-  featuredQuote: Quote;
-  quotes: Quote[];
+  featuredQuote?: Quote;
+  quotes?: Quote[];
   teacherSlug?: string;
   studentSlugs?: string[];
 };
@@ -152,6 +152,41 @@ export const scholars: Scholar[] = [
         text: "Le Qur'an est une guérison de ce qui est dans les poitrines (c'est-à-dire les cœurs) ; il en fait sortir ce que le diable y jette comme doutes, désirs et mauvaises intentions.",
         source: "Ibn al-Qayyim, dans ses écrits sur le cœur et le Qur'an.",
       },
+    ],
+    teacherSlug: "ibn-taymiyya",
+  },
+
+  {
+    slug: "adh-dhahabi",
+    name: "Adh-Dhahabî",
+    nameArabic: "شمس الدين الذهبي",
+    title: "Al-Imâm",
+    fullName:
+      "Shams ad-Dîn Abû ʿAbdillâh Muhammad ibn Ahmad ibn ʿUthmân ibn Qâymâz adh-Dhahabî",
+    dates: "672–748 H / 1274–1348",
+    birth: "Né à Damas",
+    death: "Mort à Damas",
+    school: "Shâfiʿite, rattaché à l'orientation athari",
+    way: "Voie du Salaf",
+    bio: [
+      "Né à Damas, adh-Dhahabî commence jeune l'étude du Qur'an, du hadith et des sciences religieuses. Il voyage à travers le Shâm, l'Égypte, le Hijâz et la Palestine pour recueillir la science auprès des maîtres de son temps, puis revient enseigner et écrire à Damas. Il devient l'un des plus grands spécialistes du hadith, de la critique des narrateurs et de la biographie des savants.",
+    ],
+    timeline: [],
+    place: {
+      city: "Damas",
+      region: "Syrie",
+      mapKey: "damascus",
+    },
+    knownFor: [
+      "Son œuvre monumentale d'historien et de biographe",
+      "La critique des narrateurs du hadith",
+      "La préservation de la mémoire des savants de l'islam",
+    ],
+    majorWorks: [
+      "Siyar Aʿlâm an-Nubalâʾ",
+      "Târîkh al-Islâm",
+      "Mîzân al-Iʿtidâl",
+      "Tadhkirat al-Huffâz",
     ],
     teacherSlug: "ibn-taymiyya",
   },

@@ -258,29 +258,31 @@ export default async function ScholarPage({
         )}
 
         {/* Citations */}
-        <section className="mb-16">
-          <div className="flex items-center gap-4 mb-8">
-            <p className="text-[10px] tracking-[0.25em] text-gold uppercase whitespace-nowrap">
-              Citations
-            </p>
-            <div className="h-px flex-1 bg-border" />
-          </div>
-          <div className="space-y-10">
-            {scholar.quotes.map((quote, i) => (
-              <div key={i} className="border-l-2 border-gold/30 pl-6">
-                {quote.label && (
-                  <p className="text-[9px] tracking-[0.3em] text-gold-dark uppercase mb-4">
-                    {quote.label}
-                  </p>
-                )}
-                <blockquote className="font-display italic text-lg text-text leading-relaxed mb-3">
-                  &ldquo;{quote.text}&rdquo;
-                </blockquote>
-                <p className="text-xs text-text-secondary/50 leading-relaxed">{quote.source}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        {scholar.quotes && scholar.quotes.length > 0 && (
+          <section className="mb-16">
+            <div className="flex items-center gap-4 mb-8">
+              <p className="text-[10px] tracking-[0.25em] text-gold uppercase whitespace-nowrap">
+                Citations
+              </p>
+              <div className="h-px flex-1 bg-border" />
+            </div>
+            <div className="space-y-10">
+              {scholar.quotes.map((quote, i) => (
+                <div key={i} className="border-l-2 border-gold/30 pl-6">
+                  {quote.label && (
+                    <p className="text-[9px] tracking-[0.3em] text-gold-dark uppercase mb-4">
+                      {quote.label}
+                    </p>
+                  )}
+                  <blockquote className="font-display italic text-lg text-text leading-relaxed mb-3">
+                    &ldquo;{quote.text}&rdquo;
+                  </blockquote>
+                  <p className="text-xs text-text-secondary/50 leading-relaxed">{quote.source}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Retour */}
         <Link

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { scholars, buildChain } from "@/lib/scholars";
+import { scholars } from "@/lib/scholars";
+import DamascusCircle from "@/components/scholars/DamascusCircle";
 
 export const metadata: Metadata = {
   title: "Aux sources de la chaîne du savoir",
@@ -24,7 +25,6 @@ function ArrowIcon() {
 }
 
 export default function AuxSourcesPage() {
-  const chain = buildChain(scholars);
 
   return (
     <div className="min-h-screen py-20 px-4">
@@ -55,50 +55,8 @@ export default function AuxSourcesPage() {
           <div className="h-px w-24 bg-gold-dark mt-8" />
         </div>
 
-        {/* Chaîne de transmission */}
-        <div className="mb-20">
-          <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-10 text-center">
-            Chaîne de transmission
-          </p>
-          <div className="flex flex-col items-center">
-            {chain.map((scholar, i) => (
-              <div key={scholar.slug} className="flex flex-col items-center w-full">
-                <Link
-                  href={`/aux-sources/${scholar.slug}`}
-                  className="border border-gold/30 bg-card px-8 py-5 text-center hover:border-gold/60 hover:bg-gold/5 transition-colors duration-300 w-full max-w-xs"
-                >
-                  {scholar.title && (
-                    <p className="text-[9px] tracking-[0.3em] text-gold-dark uppercase mb-1">
-                      {scholar.title}
-                    </p>
-                  )}
-                  <p className="font-display text-xl text-text">{scholar.name}</p>
-                  <p
-                    className="mt-1"
-                    dir="rtl"
-                    lang="ar"
-                    style={{ fontFamily: "var(--font-amiri)", fontSize: 15, color: "rgba(201,168,76,0.5)" }}
-                  >
-                    {scholar.nameArabic}
-                  </p>
-                  <p className="text-[10px] text-text-secondary/50 mt-1 tracking-wider">
-                    {scholar.dates}
-                  </p>
-                </Link>
-
-                {i < chain.length - 1 && (
-                  <div className="flex flex-col items-center py-1">
-                    <div className="w-px h-5 bg-gold/25" />
-                    <p className="text-[8px] tracking-[0.25em] text-gold-dark uppercase py-1.5">
-                      son élève le plus renommé
-                    </p>
-                    <div className="w-px h-5 bg-gold/25" />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Cercle de Damas */}
+        <DamascusCircle scholars={scholars} />
 
         {/* Séparateur */}
         <div className="flex items-center gap-4 mb-16">
@@ -160,23 +118,29 @@ export default function AuxSourcesPage() {
 
               <div className="h-px bg-border group-hover:bg-gold/20 transition-colors duration-300" />
 
-              <blockquote className="font-display italic text-text-secondary text-base leading-relaxed flex-1">
-                <span
-                  className="text-gold/25 not-italic"
-                  style={{ fontSize: 36, lineHeight: 1 }}
-                  aria-hidden
-                >
-                  &ldquo;
-                </span>
-                {scholar.featuredQuote.text}
-                <span
-                  className="text-gold/25 not-italic"
-                  style={{ fontSize: 36, lineHeight: 1 }}
-                  aria-hidden
-                >
-                  &rdquo;
-                </span>
-              </blockquote>
+              {scholar.featuredQuote ? (
+                <blockquote className="font-display italic text-text-secondary text-base leading-relaxed flex-1">
+                  <span
+                    className="text-gold/25 not-italic"
+                    style={{ fontSize: 36, lineHeight: 1 }}
+                    aria-hidden
+                  >
+                    &ldquo;
+                  </span>
+                  {scholar.featuredQuote.text}
+                  <span
+                    className="text-gold/25 not-italic"
+                    style={{ fontSize: 36, lineHeight: 1 }}
+                    aria-hidden
+                  >
+                    &rdquo;
+                  </span>
+                </blockquote>
+              ) : (
+                <p className="font-display italic text-text-secondary/40 text-sm flex-1">
+                  Citations à venir.
+                </p>
+              )}
 
               <p className="text-xs tracking-widest text-gold uppercase flex items-center gap-2">
                 Lire la fiche complète
