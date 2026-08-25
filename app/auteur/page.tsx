@@ -69,30 +69,68 @@ export default function AuteurPage() {
             {/* Bio */}
             <div className="space-y-6 text-text-secondary leading-relaxed">
               <p>
-                Ahmed K. est auteur et réalisateur audiovisuel, documentaire, publicité, contenus de marque.
-                Dès 2010, il collabore avec plusieurs maisons d&rsquo;édition islamiques, prête sa voix à de
-                nombreux livres audio, et réalise des vidéos pour des marques et promotions islamiques, dont
-                il assure aussi la voix off, parmi les premiers à le faire sur YouTube. Cette expérience le
-                mène ensuite vers de grandes marques internationales, télévision nationale, sport extrême,
-                hôtellerie de luxe, innovation automobile, dont il raconte les histoires à travers le monde.
+                Depuis l&rsquo;enfance, Ahmed K. évolue dans le monde de l&rsquo;audio et du son, dont
+                il maîtrise l&rsquo;écriture, la voix et la technique et l&rsquo;ingénierie du son. Ce
+                socle nourrit tout son parcours. Devenu auteur et réalisateur audiovisuel, il œuvre dans
+                le documentaire, la publicité et les contenus de marque.
               </p>
               <p>
-                Le cœur, sa purification, sa proximité avec Allah est au centre de sa vie depuis toujours,
-                bien avant que la caméra ou le micro n&rsquo;entrent en scène. Depuis des années, il lit,
-                apprend, approfondit, nourri par l&rsquo;enseignement des grands savants de l&rsquo;islam,
-                Ibn al-Qayyim, Ibn Taymiyya et par ses études de psychologie islamique. Une quête patiente
-                pour comprendre ce mal silencieux qui touche tant de musulmans pratiquants : le vide malgré
-                la pratique, la lourdeur malgré le dhikr.
+                Dès 2010, il collabore avec plusieurs maisons d&rsquo;édition islamiques et prête sa
+                voix à de nombreux livres audio. Il est l&rsquo;un des premiers francophones à assurer
+                la voix off de vidéos islamiques, à une époque où le format émergeait à peine, et réalise
+                et participe à des séries connues diffusées sur YouTube et Dailymotion. On lui doit le
+                premier livre audio islamique francophone vendu en édition.
               </p>
               <p>
-                De cette double expérience l&rsquo;art de raconter et l&rsquo;exigence de la science du
-                cœur, est née la série <span className="text-text">Cœur Vivant</span>, et avec elle,{" "}
+                Au fil des années, son travail le mène à travers le monde et vers de grandes marques
+                internationales et des univers variés : télévision nationale, sport extrême, hôtellerie
+                de luxe, innovation automobile. Il réalise courts métrages, films institutionnels,
+                documentaires et podcasts, pour des maisons d&rsquo;édition, des ONG internationales,
+                des marques et la télévision. Plus tard, il initie un projet de livres audio et
+                d&rsquo;histoires pour enfants, dont il conçoit l&rsquo;idée avant d&rsquo;en
+                accompagner la réalisation, sans jamais cesser de réaliser films et séries. Un même fil
+                conducteur relie tout son travail : l&rsquo;art de raconter des histoires qui touchent.
+              </p>
+              <p>
+                En parallèle, le cœur, sa purification, sa proximité avec Allah, est au centre de sa
+                vie depuis toujours, bien avant que la caméra ou le micro n&rsquo;entrent en scène.
+                Depuis des années, il lit, étudie et approfondit, nourri par l&rsquo;enseignement des
+                grands savants de l&rsquo;islam, Ibn al-Qayyim, Ibn Taymiyya, par des cours de
+                psychologie islamique suivis en institut, et par ce qu&rsquo;il a appris auprès des
+                gens de science. Une quête patiente, personnelle et exigeante, pour comprendre ce mal
+                silencieux qui touche tant de musulmans pratiquants : le vide malgré la pratique, la
+                lourdeur malgré le dhikr.
+              </p>
+              <p>
+                De cette double expérience, l&rsquo;art de raconter et l&rsquo;exigence de la science
+                du cœur, est née la série{" "}
+                <span className="text-text">Cœur Vivant</span>, et avec elle{" "}
                 <span className="text-text">KUNUZ ADIN ÉDITIONS</span>, la maison qu&rsquo;il a fondée.
+                Aujourd&rsquo;hui encore, il souhaite porter de beaux projets audiovisuels à travers{" "}
+                <span className="text-text">KUNUZ ADIN ÉDITIONS</span>.
               </p>
               <p>
-                Ahmed K. écrit pour celles et ceux qui pratiquent sans que leur cœur ne s&rsquo;apaise
+                Ahmed K. écrit pour celles et ceux qui pratiquent sans que leur cœur ne s&rsquo;apaise,
                 avec une exigence constante : rester fidèle à la source, sans jamais la diluer.
               </p>
+            </div>
+
+            {/* Encart partenariat */}
+            <div className="mt-12 border border-gold/30 bg-gold/5 p-6 sm:p-8">
+              <p className="text-[10px] tracking-[0.3em] text-gold uppercase mb-4">
+                Un projet à raconter&nbsp;?
+              </p>
+              <p className="text-text-secondary text-sm leading-relaxed mb-6">
+                KUNUZ ADIN ÉDITIONS est ouverte aux collaborations audiovisuelles : films,
+                documentaires, livres audio, contenus de marque. Si vous portez un projet ou souhaitez
+                explorer un partenariat, écrivez-nous pour en savoir plus.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 border border-gold text-gold text-xs tracking-widest uppercase px-6 py-3.5 hover:bg-gold/10 transition-colors duration-300"
+              >
+                Nous contacter
+              </Link>
             </div>
           </div>
 
