@@ -1,45 +1,23 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 
 const fmt = (amount: number) =>
   new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(amount);
 
 export default function CartDrawer() {
-  const { items, totalItems, subtotal, isOpen, closeCart, removeFromCart, updateQuantity, clearCart } =
+  const { items, totalItems, subtotal, isOpen, closeCart, removeFromCart, updateQuantity } =
     useCart();
 
-  const [loading, setLoading] = useState(false);
-  const [error,   setError]   = useState<string | null>(null);
+  const router = useRouter();
 
-  async function handleCheckout() {
+  function handleCheckout() {
     if (!items.length) return;
-    setLoading(true);
-    setError(null);
-
-    try {
-      const res  = await fetch("/api/stripe/checkout", {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({
-          items: items.map((i) => ({ priceId: i.priceId, quantity: i.quantity })),
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok || !data.url) {
-        setError(data.error ?? "Erreur lors de la commande.");
-        setLoading(false);
-        return;
-      }
-      clearCart();
-      window.location.href = data.url;
-    } catch {
-      setError("Impossible de contacter le serveur.");
-      setLoading(false);
-    }
+    closeCart();
+    router.push("/checkout");
   }
 
   return (
@@ -175,10 +153,6 @@ export default function CartDrawer() {
               Frais de port et TVA calculés à l&rsquo;étape suivante.
             </p>
 
-            {error && (
-              <p className="text-[11px] text-red-400/80 leading-snug">{error}</p>
-            )}
-
             <p className="text-[11px] text-text-secondary/50 leading-relaxed">
               Droit de rétractation de 14 jours. Frais de retour à la charge du client.{" "}
               <Link
@@ -197,20 +171,10 @@ export default function CartDrawer() {
             {/* Checkout CTA */}
             <button
               onClick={handleCheckout}
-              disabled={loading}
-              className="w-full bg-gold text-bg text-xs tracking-widest uppercase py-4 hover:bg-gold-light transition-colors duration-300 disabled:opacity-60 disabled:cursor-wait flex items-center justify-center gap-3"
+              className="w-full bg-gold text-bg text-xs tracking-widest uppercase py-4 hover:bg-gold-light transition-colors duration-300 flex items-center justify-center gap-3"
             >
-              {loading ? (
-                <>
-                  <LoadingDots />
-                  Redirection…
-                </>
-              ) : (
-                <>
-                  <CartIcon className="w-4 h-4" />
-                  Commander · {fmt(subtotal)}
-                </>
-              )}
+              <CartIcon className="w-4 h-4" />
+              Commander · {fmt(subtotal)}
             </button>
           </div>
         )}
@@ -246,16 +210,4 @@ function TrashIcon() {
   );
 }
 
-function LoadingDots() {
-  return (
-    <span className="flex gap-0.5">
-      {[0, 1, 2].map((i) => (
-        <span
-          key={i}
-          className="w-1 h-1 rounded-full bg-current animate-bounce"
-          style={{ animationDelay: `${i * 0.15}s` }}
-        />
-      ))}
-    </span>
-  );
-}
+
