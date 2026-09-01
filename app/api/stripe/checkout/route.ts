@@ -9,28 +9,8 @@ const ALLOWED_PRICES = new Set([
 
 type LineItem = { priceId: string; quantity: number };
 
-type RelayPoint = {
-  id: string;
-  name: string;
-  address: string;
-  postal: string;
-  city: string;
-  country: string;
-};
-
-type CustomerInfo = {
-  name: string;
-  email: string;
-  phone: string;
-};
-
 function clampQty(q: unknown): number {
   return Math.min(10, Math.max(1, Math.round(Number(q) || 1)));
-}
-
-function truncate(s: unknown, max = 500): string {
-  const str = String(s ?? "");
-  return str.length > max ? str.slice(0, max) : str;
 }
 
 export async function POST(request: Request) {
@@ -67,24 +47,6 @@ export async function POST(request: Request) {
     return Response.json({ error: `Price ID invalide : ${invalid.priceId}` }, { status: 400 });
   }
 
-  // Relay point + customer info (optional for legacy callers, required for /checkout page)
-  const relay: RelayPoint | null    = body?.relayPoint    ?? null;
-  const customer: CustomerInfo | null = body?.customerInfo ?? null;
-
-  const metadata: Record<string, string> = {};
-  if (relay) {
-    metadata.relay_id      = truncate(relay.id, 100);
-    metadata.relay_name    = truncate(relay.name, 200);
-    metadata.relay_address = truncate(relay.address, 300);
-    metadata.relay_postal  = truncate(relay.postal, 20);
-    metadata.relay_city    = truncate(relay.city, 100);
-    metadata.relay_country = truncate(relay.country, 10);
-  }
-  if (customer) {
-    metadata.customer_name  = truncate(customer.name, 200);
-    metadata.customer_phone = truncate(customer.phone, 50);
-  }
-
   const stripe = new Stripe(secretKey);
 
   try {
@@ -103,10 +65,8 @@ export async function POST(request: Request) {
       customer_creation: "if_required",
       automatic_tax:     { enabled: true },
       payment_method_types: ["card"],
-      ...(customer?.email ? { customer_email: customer.email } : {}),
-      ...(Object.keys(metadata).length > 0 ? { metadata } : {}),
       success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url:  `${baseUrl}/checkout`,
+      cancel_url:  `${baseUrl}/boutique`,
     });
 
     return Response.json({ url: session.url });

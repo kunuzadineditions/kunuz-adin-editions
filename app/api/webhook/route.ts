@@ -22,12 +22,7 @@ export async function POST(request: Request) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
-    const m = session.metadata ?? {};
-    console.log(
-      "[stripe] commande confirmée:", session.id,
-      "| client:", m.customer_name, m.customer_phone,
-      "| relais:", m.relay_id, m.relay_name, m.relay_city,
-    );
+    console.log("[stripe] commande confirmée:", session.id);
     // TODO: envoyer un email de confirmation via Brevo
   }
 
