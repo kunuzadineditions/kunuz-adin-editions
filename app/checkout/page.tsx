@@ -28,6 +28,14 @@ function loadScript(src: string): Promise<void> {
   });
 }
 
+function loadCSS(href: string) {
+  if (document.querySelector(`link[href="${href}"]`)) return;
+  const l = document.createElement("link");
+  l.rel  = "stylesheet";
+  l.href = href;
+  document.head.appendChild(l);
+}
+
 export default function CheckoutPage() {
   const { items, subtotal, hydrated, clearCart } = useCart();
   const router = useRouter();
@@ -54,6 +62,7 @@ export default function CheckoutPage() {
 
     async function boot() {
       try {
+        loadCSS("https://widget.mondialrelay.com/parcelshop-picker/v3_0/css/parcelshop-picker.min.css");
         await loadScript("https://code.jquery.com/jquery-3.7.1.min.js");
         await loadScript(
           "https://widget.mondialrelay.com/parcelshop-picker/v3_0/script/parcelshop-picker.min.js"
@@ -137,15 +146,7 @@ export default function CheckoutPage() {
   if (!hydrated) return null;
 
   return (
-    <>
-      {/* MR widget stylesheet */}
-      {/* eslint-disable-next-line @next/next/no-css-tags */}
-      <link
-        rel="stylesheet"
-        href="https://widget.mondialrelay.com/parcelshop-picker/v3_0/css/parcelshop-picker.min.css"
-      />
-
-      <div className="min-h-screen py-20 px-4">
+    <div className="min-h-screen py-20 px-4">
         <div className="max-w-2xl mx-auto">
 
           {/* ── Header ─────────────────────────────────────────────────────── */}
@@ -325,7 +326,6 @@ export default function CheckoutPage() {
           </form>
         </div>
       </div>
-    </>
   );
 }
 
