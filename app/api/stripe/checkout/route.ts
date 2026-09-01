@@ -60,8 +60,9 @@ export async function POST(request: Request) {
         { shipping_rate: "shr_1TiaPIHsvBneNqFi4w8p2zh2" },
       ],
       shipping_address_collection: {
-        allowed_countries: ["FR", "BE", "CH", "LU", "MA", "TN", "DZ", "SN", "CI"],
+        allowed_countries: ["FR"],
       },
+      phone_number_collection: { enabled: true },
       customer_creation: "if_required",
       automatic_tax:     { enabled: true },
       payment_method_types: ["card"],
