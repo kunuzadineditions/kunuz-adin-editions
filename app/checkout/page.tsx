@@ -28,13 +28,6 @@ function loadScript(src: string): Promise<void> {
   });
 }
 
-function loadCSS(href: string) {
-  if (document.querySelector(`link[href="${href}"]`)) return;
-  const l = document.createElement("link");
-  l.rel  = "stylesheet";
-  l.href = href;
-  document.head.appendChild(l);
-}
 
 export default function CheckoutPage() {
   const { items, subtotal, hydrated, clearCart } = useCart();
@@ -62,16 +55,15 @@ export default function CheckoutPage() {
 
     async function boot() {
       try {
-        loadCSS("https://widget.mondialrelay.com/parcelshop-picker/v3_0/css/parcelshop-picker.min.css");
         await loadScript("https://code.jquery.com/jquery-3.7.1.min.js");
         await loadScript(
-          "https://widget.mondialrelay.com/parcelshop-picker/v3_0/script/parcelshop-picker.min.js"
+          "https://widget.mondialrelay.com/parcelshop-picker/jquery.plugin.mondialrelay.parcelshoppicker.min.js"
         );
         if (cancelled) return;
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const $ = (window as any).jQuery;
-        $(document).MRParcelShopPicker({
+        $("#Zone_Widget").MR_ParcelShopPicker({
           Target:          "#MR_SelectedRelay",
           Brand:           "CC240PWQ",
           Country:         "FR",
