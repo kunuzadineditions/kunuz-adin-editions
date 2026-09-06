@@ -6,6 +6,7 @@ import LaunchBanner from "@/components/layout/LaunchBanner";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/context/CartContext";
+import ChatWidget from "@/components/chat/ChatWidget";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -63,6 +64,7 @@ export default function RootLayout({
           <CartDrawer />
           <main className="flex-1">{children}</main>
           <Footer />
+          <ChatWidget />
         </CartProvider>
       </body>
     </html>
