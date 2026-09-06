@@ -18,23 +18,35 @@ export default function ChatWidget() {
 
   // Stable session ID for the lifetime of this page visit
   const sessionIdRef = useRef<string>(crypto.randomUUID());
-  // Mirror of messages accessible inside the pagehide listener (registered once)
+  // Mirror of messages state for use inside event listeners (registered once)
   const messagesRef = useRef<Message[]>([]);
   useEffect(() => { messagesRef.current = messages; }, [messages]);
+  // Guard: only send one recap per session (widget close OR pagehide)
+  const recapSentRef = useRef(false);
 
-  // Send conversation to recap endpoint when visitor leaves the page
+  function sendRecap() {
+    const msgs = messagesRef.current;
+    if (recapSentRef.current) return;
+    if (!msgs.some((m) => m.role === "user")) return;
+    recapSentRef.current = true;
+    const blob = new Blob(
+      [JSON.stringify({ sessionId: sessionIdRef.current, messages: msgs, timestamp: new Date().toISOString() })],
+      { type: "application/json" }
+    );
+    navigator.sendBeacon("/api/chat/recap", blob);
+  }
+
+  // Primary trigger: widget closed by visitor
+  function closeWidget() {
+    sendRecap();
+    setOpen(false);
+  }
+
+  // Fallback trigger: actual page unload (tab close, hard refresh, external navigation)
+  // Does NOT fire on Next.js client-side navigation between pages of the same site
   useEffect(() => {
-    function handlePageHide() {
-      const msgs = messagesRef.current;
-      if (!msgs.some((m) => m.role === "user")) return;
-      const blob = new Blob(
-        [JSON.stringify({ sessionId: sessionIdRef.current, messages: msgs, timestamp: new Date().toISOString() })],
-        { type: "application/json" }
-      );
-      navigator.sendBeacon("/api/chat/recap", blob);
-    }
-    window.addEventListener("pagehide", handlePageHide);
-    return () => window.removeEventListener("pagehide", handlePageHide);
+    window.addEventListener("pagehide", sendRecap);
+    return () => window.removeEventListener("pagehide", sendRecap);
   }, []);
 
   useEffect(() => {
@@ -105,7 +117,7 @@ export default function ChatWidget() {
               Assistant
             </span>
             <button
-              onClick={() => setOpen(false)}
+              onClick={closeWidget}
               aria-label="Fermer"
               className="opacity-50 hover:opacity-100 transition-opacity"
               style={{ color: "var(--color-text, #F0EDE6)" }}
@@ -226,9 +238,9 @@ export default function ChatWidget() {
         </div>
       )}
 
-      {/* Bubble toggle */}
+      {/* Bubble toggle — closes widget (with recap) if open, opens if closed */}
       <button
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => (open ? closeWidget() : setOpen(true))}
         aria-label={open ? "Fermer le chat" : "Ouvrir le chat"}
         className="fixed bottom-4 right-4 z-50 flex items-center justify-center rounded-full shadow-lg transition-transform hover:scale-105 active:scale-95"
         style={{
