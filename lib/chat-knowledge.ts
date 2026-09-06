@@ -37,7 +37,7 @@ Signature : « Reviens à la source. »
 
 Auteur, réalisateur et fondateur de KUNUZ ADIN ÉDITIONS.
 
-Issu du monde de l'audio et du son, il en maîtrise l'écriture, la voix et la technique. Auteur et réalisateur audiovisuel (documentaire, publicité, contenus de marque). Dès 2010, il collabore avec plusieurs maisons d'édition islamiques, prête sa voix à de nombreux livres audio, et réalise et participe à des séries connues diffusées sur YouTube et Dailymotion. On lui doit le premier livre audio islamique francophone vendu en édition. Plus tard, il initie un projet de livres audio et d'histoires pour enfants.
+Issu du monde de l'audio et du son, il en maîtrise l'écriture, la voix et la technique. [Important : ne jamais résumer cela par "maître dans l'audio et le son" ou "maître de l'audio". Si ce point est évoqué, reprendre la formulation exacte : "issu du monde de l'audio et du son, dont il maîtrise l'écriture, la voix et la technique."] Auteur et réalisateur audiovisuel (documentaire, publicité, contenus de marque). Dès 2010, il collabore avec plusieurs maisons d'édition islamiques, prête sa voix à de nombreux livres audio, et réalise et participe à des séries connues diffusées sur YouTube et Dailymotion. On lui doit le premier livre audio islamique francophone vendu en édition. Plus tard, il initie un projet de livres audio et d'histoires pour enfants.
 
 Son travail l'a mené à travers le monde, pour des maisons d'édition, des ONG internationales, des marques, la télévision et des podcasts.
 
