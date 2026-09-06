@@ -16,6 +16,27 @@ export default function ChatWidget() {
   const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  // Stable session ID for the lifetime of this page visit
+  const sessionIdRef = useRef<string>(crypto.randomUUID());
+  // Mirror of messages accessible inside the pagehide listener (registered once)
+  const messagesRef = useRef<Message[]>([]);
+  useEffect(() => { messagesRef.current = messages; }, [messages]);
+
+  // Send conversation to recap endpoint when visitor leaves the page
+  useEffect(() => {
+    function handlePageHide() {
+      const msgs = messagesRef.current;
+      if (!msgs.some((m) => m.role === "user")) return;
+      const blob = new Blob(
+        [JSON.stringify({ sessionId: sessionIdRef.current, messages: msgs, timestamp: new Date().toISOString() })],
+        { type: "application/json" }
+      );
+      navigator.sendBeacon("/api/chat/recap", blob);
+    }
+    window.addEventListener("pagehide", handlePageHide);
+    return () => window.removeEventListener("pagehide", handlePageHide);
+  }, []);
+
   useEffect(() => {
     if (open) bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open]);
@@ -161,37 +182,45 @@ export default function ChatWidget() {
           {/* Input */}
           {!limitReached && (
             <div
-              className="shrink-0 flex items-end gap-2 px-3 py-3"
+              className="shrink-0 px-3 pt-3 pb-1"
               style={{ borderTop: "1px solid var(--color-border, #2A2520)" }}
             >
-              <textarea
-                ref={textareaRef}
-                rows={1}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Votre message…"
-                disabled={loading}
-                className="flex-1 resize-none rounded-md px-3 py-2 text-sm outline-none transition-colors"
-                style={{
-                  background: "var(--color-bg, #0C0C0C)",
-                  color: "var(--color-text, #F0EDE6)",
-                  border: "1px solid var(--color-border, #2A2520)",
-                  maxHeight: 100,
-                }}
-              />
-              <button
-                onClick={sendMessage}
-                disabled={loading || !input.trim()}
-                aria-label="Envoyer"
-                className="shrink-0 rounded-md p-2 transition-opacity disabled:opacity-40"
-                style={{
-                  background: "var(--color-gold, #C9A84C)",
-                  color: "#0C0C0C",
-                }}
+              <div className="flex items-end gap-2">
+                <textarea
+                  ref={textareaRef}
+                  rows={1}
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Votre message…"
+                  disabled={loading}
+                  className="flex-1 resize-none rounded-md px-3 py-2 text-sm outline-none transition-colors"
+                  style={{
+                    background: "var(--color-bg, #0C0C0C)",
+                    color: "var(--color-text, #F0EDE6)",
+                    border: "1px solid var(--color-border, #2A2520)",
+                    maxHeight: 100,
+                  }}
+                />
+                <button
+                  onClick={sendMessage}
+                  disabled={loading || !input.trim()}
+                  aria-label="Envoyer"
+                  className="shrink-0 rounded-md p-2 transition-opacity disabled:opacity-40"
+                  style={{
+                    background: "var(--color-gold, #C9A84C)",
+                    color: "#0C0C0C",
+                  }}
+                >
+                  <Send size={16} />
+                </button>
+              </div>
+              <p
+                className="text-center mt-1 mb-2 text-xs"
+                style={{ color: "var(--color-text-secondary, #A89F8C)", opacity: 0.6 }}
               >
-                <Send size={16} />
-              </button>
+                Échanges enregistrés pour améliorer notre service.
+              </p>
             </div>
           )}
         </div>
