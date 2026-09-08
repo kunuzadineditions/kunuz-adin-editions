@@ -143,27 +143,33 @@ function buildEmailHtml(p: {
 
 async function sendBrevoEmail(subject: string, htmlContent: string): Promise<void> {
   const apiKey = process.env.BREVO_API_KEY;
+  console.log("[brevo/webhook] clé présente:", apiKey ? "oui" : "NON", "| débuts:", apiKey ? apiKey.slice(0, 4) : "—");
   if (!apiKey) {
-    console.error("[brevo] BREVO_API_KEY manquante — email non envoyé");
+    console.error("[brevo/webhook] BREVO_API_KEY manquante — email non envoyé");
     return;
   }
+
+  const payload = {
+    sender: { name: "KUNUZ ADIN Éditions", email: "contact@kunuz-adin-editions.com" },
+    to:     [{ email: "kunuzadineditions@gmail.com", name: "KUNUZ ADIN Éditions" }],
+    subject,
+    htmlContent,
+  };
+  console.log("[brevo/webhook] envoi vers Brevo, sujet:", subject);
 
   const res = await fetch("https://api.brevo.com/v3/smtp/email", {
     method:  "POST",
     headers: { "Content-Type": "application/json", "api-key": apiKey },
-    body: JSON.stringify({
-      sender: { name: "KUNUZ ADIN Éditions", email: "contact@kunuz-adin-editions.com" },
-      to:     [{ email: "kunuzadineditions@gmail.com", name: "KUNUZ ADIN Éditions" }],
-      subject,
-      htmlContent,
-    }),
+    body: JSON.stringify(payload),
   });
 
+  const responseText = await res.text().catch(() => "(corps illisible)");
+  console.log("[brevo/webhook] status HTTP:", res.status);
+  console.log("[brevo/webhook] corps réponse:", responseText);
   if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    console.error("[brevo] Échec envoi:", res.status, text);
+    console.error("[brevo/webhook] ÉCHEC envoi — status:", res.status, "| réponse:", responseText);
   } else {
-    console.log("[brevo] Email envoyé :", subject);
+    console.log("[brevo/webhook] email envoyé avec succès :", subject);
   }
 }
 

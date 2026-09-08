@@ -63,10 +63,13 @@ function buildHtml(messages: Message[], timestamp: string): string {
 
 async function sendBrevoEmail(subject: string, htmlContent: string) {
   const apiKey = process.env.BREVO_API_KEY;
+  console.log("[chat/recap] clé présente:", apiKey ? "oui" : "NON", "| débuts:", apiKey ? apiKey.slice(0, 4) : "—");
   if (!apiKey) {
-    console.error("[chat/recap] BREVO_API_KEY manquante");
+    console.error("[chat/recap] BREVO_API_KEY manquante — email non envoyé");
     return;
   }
+
+  console.log("[chat/recap] envoi vers Brevo, sujet:", subject);
   const res = await fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST",
     headers: { "Content-Type": "application/json", "api-key": apiKey },
@@ -77,9 +80,14 @@ async function sendBrevoEmail(subject: string, htmlContent: string) {
       htmlContent,
     }),
   });
+
+  const responseText = await res.text().catch(() => "(corps illisible)");
+  console.log("[chat/recap] status HTTP:", res.status);
+  console.log("[chat/recap] corps réponse:", responseText);
   if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    console.error("[chat/recap] Échec envoi Brevo:", res.status, text);
+    console.error("[chat/recap] ÉCHEC envoi — status:", res.status, "| réponse:", responseText);
+  } else {
+    console.log("[chat/recap] email envoyé avec succès :", subject);
   }
 }
 
